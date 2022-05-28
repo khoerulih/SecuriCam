@@ -1,5 +1,7 @@
 package com.securicam.ui.pages.register
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -31,6 +33,7 @@ class RegisterActivity : AppCompatActivity() {
 
         setupView()
         setButtonEnable()
+        playAnimation()
 
 //        val registerViewModel = ViewModelProvider(
 //            this,
@@ -142,6 +145,56 @@ class RegisterActivity : AppCompatActivity() {
 //        }
 //    }
 
+    private fun playAnimation() {
+        val logoApp = ObjectAnimator.ofFloat(binding?.tvRegister, View.ALPHA, ALPHA).setDuration(
+            DURATION
+        )
+        val tvUsername = ObjectAnimator.ofFloat(binding?.tvName, View.ALPHA, ALPHA).setDuration(
+            DURATION
+        )
+        val edtUsername =
+            ObjectAnimator.ofFloat(binding?.edtUsername, View.ALPHA, ALPHA).setDuration(
+                DURATION
+            )
+        val tvEmail = ObjectAnimator.ofFloat(binding?.tvEmail, View.ALPHA, ALPHA).setDuration(
+            DURATION
+        )
+        val edtEmail = ObjectAnimator.ofFloat(binding?.edtEmail, View.ALPHA, ALPHA).setDuration(
+            DURATION
+        )
+        val tvPassword = ObjectAnimator.ofFloat(
+            binding?.tvPassword, View.ALPHA,
+            ALPHA
+        ).setDuration(DURATION)
+        val edtPassword = ObjectAnimator.ofFloat(
+            binding?.edtPassword, View.ALPHA,
+            ALPHA
+        ).setDuration(DURATION)
+        val registerBtn =
+            ObjectAnimator.ofFloat(binding?.btnRegister, View.ALPHA, ALPHA).setDuration(
+                DURATION
+            )
+        val tvLogin = ObjectAnimator.ofFloat(
+            binding?.tvLogin, View.ALPHA,
+            ALPHA
+        ).setDuration(DURATION)
+
+        AnimatorSet().apply {
+            playSequentially(
+                logoApp,
+                tvUsername,
+                edtUsername,
+                tvEmail,
+                edtEmail,
+                tvPassword,
+                edtPassword,
+                registerBtn,
+                tvLogin
+            )
+            start()
+        }
+    }
+
     private fun goToLoginActivity() {
         val intent = LoginActivity.loginActivityIntent(this)
         startActivity(intent)
@@ -149,6 +202,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val DURATION = 200L
+        private const val ALPHA = 1f
         fun registerActivityIntent(context: Context): Intent {
             return Intent(context, RegisterActivity::class.java)
         }

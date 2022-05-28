@@ -1,5 +1,7 @@
 package com.securicam.ui.pages.login
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -30,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding?.root)
         setupView()
         setButtonEnable()
+        playAnimation()
 
         binding.let {
             editTextListener(it?.edtEmail, "email")
@@ -47,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding?.edtPassword?.text.toString()
 
             Toast.makeText(this@LoginActivity, "$email : $password", Toast.LENGTH_SHORT).show()
+            goToMainActivity()
 
 //            loginViewModel.login(email, password)
 //            showLoading(true)
@@ -106,11 +110,36 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-//    private fun goToMainActivity() {
-//        val intent = MainActivity.mainActivityIntent(this)
-//        startActivity(intent)
-//        finish()
-//    }
+    private fun playAnimation() {
+        val logoApp =ObjectAnimator.ofFloat(binding?.tvLogin, View.ALPHA, ALPHA).setDuration(DURATION)
+        val welcome = ObjectAnimator.ofFloat(binding?.tvWelcome, View.ALPHA, ALPHA).setDuration(DURATION)
+        val tvEmail = ObjectAnimator.ofFloat(binding?.tvEmail, View.ALPHA, ALPHA).setDuration(DURATION)
+        val edtEmail = ObjectAnimator.ofFloat(binding?.edtEmail, View.ALPHA, ALPHA).setDuration(DURATION)
+        val tvPassword = ObjectAnimator.ofFloat(binding?.tvPassword, View.ALPHA, ALPHA).setDuration(DURATION)
+        val edtPassword = ObjectAnimator.ofFloat(binding?.edtPassword, View.ALPHA, ALPHA).setDuration(DURATION)
+        val loginBtn = ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, ALPHA).setDuration(DURATION)
+        val tvRegister = ObjectAnimator.ofFloat(binding?.tvRegister, View.ALPHA, ALPHA).setDuration(DURATION)
+
+        AnimatorSet().apply {
+            playSequentially(
+                logoApp,
+                welcome,
+                tvEmail,
+                edtEmail,
+                tvPassword,
+                edtPassword,
+                loginBtn,
+                tvRegister
+            )
+            start()
+        }
+    }
+
+    private fun goToMainActivity() {
+        val intent = MainActivity.mainActivityIntent(this)
+        startActivity(intent)
+        finish()
+    }
 
 //    private fun showLoading(isLoading: Boolean) {
 //        if (isLoading) {
@@ -129,6 +158,8 @@ class LoginActivity : AppCompatActivity() {
 //    }
 
     companion object {
+        private const val DURATION = 200L
+        private const val ALPHA = 1f
         fun loginActivityIntent(context: Context): Intent {
             return Intent(context, LoginActivity::class.java)
         }

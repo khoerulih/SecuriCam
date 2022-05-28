@@ -15,7 +15,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="100dp"
-        android:src="@drawable/splash"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
