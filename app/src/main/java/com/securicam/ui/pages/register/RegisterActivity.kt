@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
 import com.securicam.databinding.ActivityRegisterBinding
 import com.securicam.ui.pages.login.LoginActivity
+import com.securicam.utils.goToLoginActivity
 
 class RegisterActivity : AppCompatActivity() {
     private var _binding: ActivityRegisterBinding? = null
@@ -73,7 +74,8 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT)
                     .show()
 
-                goToLoginActivity()
+                goToLoginActivity(this)
+                finish()
             }
         }
 
@@ -84,7 +86,8 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding?.tvLogin?.setOnClickListener {
-            goToLoginActivity()
+            goToLoginActivity(this)
+            finish()
         }
 
         binding?.btnRegister?.setOnClickListener {
@@ -215,12 +218,6 @@ class RegisterActivity : AppCompatActivity() {
             )
             start()
         }
-    }
-
-    private fun goToLoginActivity() {
-        val intent = LoginActivity.loginActivityIntent(this)
-        startActivity(intent)
-        finish()
     }
 
     companion object {

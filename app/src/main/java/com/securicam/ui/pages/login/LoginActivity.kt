@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -19,15 +18,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.securicam.MainActivity
 import com.securicam.R
 import com.securicam.databinding.ActivityLoginBinding
 import com.securicam.ui.ViewModelFactory
-import com.securicam.ui.pages.cameramain.CameraMainActivity
-import com.securicam.ui.pages.clientmain.ClientMainActivity
-import com.securicam.ui.pages.register.RegisterActivity
-import com.securicam.utils.UserPreference
-import com.securicam.utils.UserPreferenceViewModel
+import com.securicam.utils.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -61,13 +55,14 @@ class LoginActivity : AppCompatActivity() {
         userPreferenceViewModel.getToken().observe(this) { token ->
             if (!token.isNullOrEmpty()) {
                 userPreferenceViewModel.getRole().observe(this) { role ->
-                    Log.d("CAMERA", role)
                     when (role) {
                         "CLIENT" -> {
-                            goToClientMainActivity()
+                            goToClientMainActivity(this)
+                            finish()
                         }
                         "CAM" -> {
-                            goToCameraMainActivity()
+                            goToCameraMainActivity(this)
+                            finish()
                         }
                     }
                 }
@@ -80,8 +75,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding?.tvRegister?.setOnClickListener {
-            val intent = RegisterActivity.registerActivityIntent(this)
-            startActivity(intent)
+            goToRegisterActivity(this)
             finish()
         }
 
@@ -189,24 +183,6 @@ class LoginActivity : AppCompatActivity() {
             )
             start()
         }
-    }
-
-    private fun goToMainActivity() {
-        val intent = MainActivity.mainActivityIntent(this)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun goToClientMainActivity() {
-        val intent = ClientMainActivity.clientMainActivityIntent(this)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun goToCameraMainActivity() {
-        val intent = CameraMainActivity.cameraMainActivityIntent(this)
-        startActivity(intent)
-        finish()
     }
 
     private fun showLoading(isLoading: Boolean) {
