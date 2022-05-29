@@ -21,4 +21,14 @@
     <string name="email_invalid">Please enter a valid email.</string>
     <string name="email_empty">Email cannot be empty!!</string>
     <string name="username_empty">Username cannot be empty!!</string>
+    <string name="login_success">Login Berhasil</string>
+    <string name="login_failed">Login Gagal</string>
+    <string name="role">Set Device As</string>
+    <string name="register_failed">Register Gagal</string>
+    <string name="register_success">Register Berhasil, SIlahkan Login</string>
+
+    <string-array name="roles">
+        <item>CLIENT</item>
+        <item>CAM</item>
+    </string-array>
 </resources>

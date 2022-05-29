@@ -12,8 +12,10 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
 import com.securicam.databinding.ActivityRegisterBinding
 import com.securicam.ui.pages.login.LoginActivity
@@ -25,6 +27,7 @@ class RegisterActivity : AppCompatActivity() {
     private var isValidUsername: Boolean? = null
     private var isValidEmail: Boolean? = null
     private var isValidPassword: Boolean? = null
+    private lateinit var role: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,22 +38,43 @@ class RegisterActivity : AppCompatActivity() {
         setButtonEnable()
         playAnimation()
 
-//        val registerViewModel = ViewModelProvider(
-//            this,
-//            ViewModelProvider.NewInstanceFactory()
-//        )[RegisterViewModel::class.java]
-//
-//        registerViewModel.isError.observe(this) { error ->
-//            showLoading(false)
-//            if (error) {
-//                Toast.makeText(this, getString(R.string.register_failed), Toast.LENGTH_SHORT).show()
-//            } else {
-//                Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT)
-//                    .show()
-//
-//                goToLoginActivity()
-//            }
-//        }
+        val items = resources.getStringArray(R.array.roles)
+        val adapter = ArrayAdapter(
+            this,
+            androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item,
+            items
+        )
+        binding?.spinnerRole?.adapter = adapter
+
+        binding?.spinnerRole?.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+                role = items[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
+
+
+        val registerViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[RegisterViewModel::class.java]
+
+        registerViewModel.isError.observe(this) { error ->
+            showLoading(false)
+            if (error) {
+                Toast.makeText(this, getString(R.string.register_failed), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT)
+                    .show()
+
+                goToLoginActivity()
+            }
+        }
 
         binding.let {
             editTextListener(it?.edtUsername, "username")
@@ -67,16 +91,9 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding?.edtEmail?.text.toString()
             val password = binding?.edtPassword?.text.toString()
 
-            Toast.makeText(this@RegisterActivity, "$name :$email : $password", Toast.LENGTH_SHORT)
-                .show()
-
-//            registerViewModel.register(name, email, password)
-//            showLoading(true)
+            registerViewModel.register(name, email, password, role)
+            showLoading(true)
         }
-
-//        binding?.ivSetting?.setOnClickListener {
-//            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-//        }
     }
 
     private fun setupView() {
@@ -137,13 +154,13 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
-//    private fun showLoading(isLoading: Boolean) {
-//        if (isLoading) {
-//            binding?.progressBar?.visibility = View.VISIBLE
-//        } else {
-//            binding?.progressBar?.visibility = View.GONE
-//        }
-//    }
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.progressBar?.visibility = View.VISIBLE
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
+    }
 
     private fun playAnimation() {
         val logoApp = ObjectAnimator.ofFloat(binding?.tvRegister, View.ALPHA, ALPHA).setDuration(
@@ -178,6 +195,8 @@ class RegisterActivity : AppCompatActivity() {
             binding?.tvLogin, View.ALPHA,
             ALPHA
         ).setDuration(DURATION)
+        val tvRole = ObjectAnimator.ofFloat(binding?.tvRole, View.ALPHA, ALPHA).setDuration(DURATION)
+        val spinnerRole = ObjectAnimator.ofFloat(binding?.spinnerRole, View.ALPHA, ALPHA).setDuration(DURATION)
 
         AnimatorSet().apply {
             playSequentially(
@@ -189,7 +208,9 @@ class RegisterActivity : AppCompatActivity() {
                 tvPassword,
                 edtPassword,
                 registerBtn,
-                tvLogin
+                tvLogin,
+                tvRole,
+                spinnerRole
             )
             start()
         }

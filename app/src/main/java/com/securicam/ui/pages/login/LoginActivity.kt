@@ -14,11 +14,19 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.securicam.MainActivity
 import com.securicam.R
 import com.securicam.databinding.ActivityLoginBinding
+import com.securicam.ui.ViewModelFactory
 import com.securicam.ui.pages.register.RegisterActivity
+import com.securicam.utils.UserPreference
+import com.securicam.utils.UserPreferenceViewModel
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class LoginActivity : AppCompatActivity() {
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding
@@ -33,6 +41,21 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         setButtonEnable()
         playAnimation()
+
+        val pref = UserPreference.getInstance(dataStore)
+        val userPreferenceViewModel =
+            ViewModelProvider(this, ViewModelFactory.getInstance(application, pref))[UserPreferenceViewModel::class.java]
+
+        val loginViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[LoginViewModel::class.java]
+
+        userPreferenceViewModel.getToken().observe(this) {
+            if (!it.isNullOrEmpty()) {
+                goToMainActivity()
+            }
+        }
 
         binding.let {
             editTextListener(it?.edtEmail, "email")
@@ -49,11 +72,18 @@ class LoginActivity : AppCompatActivity() {
             val email = binding?.edtEmail?.text.toString()
             val password = binding?.edtPassword?.text.toString()
 
-            Toast.makeText(this@LoginActivity, "$email : $password", Toast.LENGTH_SHORT).show()
-            goToMainActivity()
+            loginViewModel.login(email, password)
+            showLoading(true)
+        }
 
-//            loginViewModel.login(email, password)
-//            showLoading(true)
+        loginViewModel.loginResult.observe(this) { result ->
+            showLoading(false)
+            userPreferenceViewModel.saveToken(result.accessToken)
+        }
+
+        loginViewModel.isError.observe(this){ status ->
+            showLoading(false)
+            setLoginStatus(status)
         }
     }
 
@@ -141,21 +171,21 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-//    private fun showLoading(isLoading: Boolean) {
-//        if (isLoading) {
-//            binding?.progressBar?.visibility = View.VISIBLE
-//        } else {
-//            binding?.progressBar?.visibility = View.GONE
-//        }
-//    }
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.progressBar?.visibility = View.VISIBLE
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
+    }
 
-//    private fun setLoginStatus(error: Boolean) {
-//        if (!error) {
-//            Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show()
-//        } else {
-//            Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    private fun setLoginStatus(error: Boolean) {
+        if (!error) {
+            Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
+        }
+    }
 
     companion object {
         private const val DURATION = 200L
