@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -22,11 +23,14 @@ import com.securicam.MainActivity
 import com.securicam.R
 import com.securicam.databinding.ActivityLoginBinding
 import com.securicam.ui.ViewModelFactory
+import com.securicam.ui.pages.cameramain.CameraMainActivity
+import com.securicam.ui.pages.clientmain.ClientMainActivity
 import com.securicam.ui.pages.register.RegisterActivity
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class LoginActivity : AppCompatActivity() {
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding
@@ -44,16 +48,29 @@ class LoginActivity : AppCompatActivity() {
 
         val pref = UserPreference.getInstance(dataStore)
         val userPreferenceViewModel =
-            ViewModelProvider(this, ViewModelFactory.getInstance(application, pref))[UserPreferenceViewModel::class.java]
+            ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance(application, pref)
+            )[UserPreferenceViewModel::class.java]
 
         val loginViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[LoginViewModel::class.java]
 
-        userPreferenceViewModel.getToken().observe(this) {
-            if (!it.isNullOrEmpty()) {
-                goToMainActivity()
+        userPreferenceViewModel.getToken().observe(this) { token ->
+            if (!token.isNullOrEmpty()) {
+                userPreferenceViewModel.getRole().observe(this) { role ->
+                    Log.d("CAMERA", role)
+                    when (role) {
+                        "CLIENT" -> {
+                            goToClientMainActivity()
+                        }
+                        "CAM" -> {
+                            goToCameraMainActivity()
+                        }
+                    }
+                }
             }
         }
 
@@ -79,9 +96,10 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResult.observe(this) { result ->
             showLoading(false)
             userPreferenceViewModel.saveToken(result.accessToken)
+            userPreferenceViewModel.setRole(result.role)
         }
 
-        loginViewModel.isError.observe(this){ status ->
+        loginViewModel.isError.observe(this) { status ->
             showLoading(false)
             setLoginStatus(status)
         }
@@ -141,14 +159,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-        val logoApp =ObjectAnimator.ofFloat(binding?.tvLogin, View.ALPHA, ALPHA).setDuration(DURATION)
-        val welcome = ObjectAnimator.ofFloat(binding?.tvWelcome, View.ALPHA, ALPHA).setDuration(DURATION)
-        val tvEmail = ObjectAnimator.ofFloat(binding?.tvEmail, View.ALPHA, ALPHA).setDuration(DURATION)
-        val edtEmail = ObjectAnimator.ofFloat(binding?.edtEmail, View.ALPHA, ALPHA).setDuration(DURATION)
-        val tvPassword = ObjectAnimator.ofFloat(binding?.tvPassword, View.ALPHA, ALPHA).setDuration(DURATION)
-        val edtPassword = ObjectAnimator.ofFloat(binding?.edtPassword, View.ALPHA, ALPHA).setDuration(DURATION)
-        val loginBtn = ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, ALPHA).setDuration(DURATION)
-        val tvRegister = ObjectAnimator.ofFloat(binding?.tvRegister, View.ALPHA, ALPHA).setDuration(DURATION)
+        val logoApp =
+            ObjectAnimator.ofFloat(binding?.tvLogin, View.ALPHA, ALPHA).setDuration(DURATION)
+        val welcome =
+            ObjectAnimator.ofFloat(binding?.tvWelcome, View.ALPHA, ALPHA).setDuration(DURATION)
+        val tvEmail =
+            ObjectAnimator.ofFloat(binding?.tvEmail, View.ALPHA, ALPHA).setDuration(DURATION)
+        val edtEmail =
+            ObjectAnimator.ofFloat(binding?.edtEmail, View.ALPHA, ALPHA).setDuration(DURATION)
+        val tvPassword =
+            ObjectAnimator.ofFloat(binding?.tvPassword, View.ALPHA, ALPHA).setDuration(DURATION)
+        val edtPassword =
+            ObjectAnimator.ofFloat(binding?.edtPassword, View.ALPHA, ALPHA).setDuration(DURATION)
+        val loginBtn =
+            ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, ALPHA).setDuration(DURATION)
+        val tvRegister =
+            ObjectAnimator.ofFloat(binding?.tvRegister, View.ALPHA, ALPHA).setDuration(DURATION)
 
         AnimatorSet().apply {
             playSequentially(
@@ -167,6 +193,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToMainActivity() {
         val intent = MainActivity.mainActivityIntent(this)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToClientMainActivity() {
+        val intent = ClientMainActivity.clientMainActivityIntent(this)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToCameraMainActivity() {
+        val intent = CameraMainActivity.cameraMainActivityIntent(this)
         startActivity(intent)
         finish()
     }

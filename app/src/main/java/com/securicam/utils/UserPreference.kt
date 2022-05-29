@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.map
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
     private val key = stringPreferencesKey("user_token")
+    private val userRole = stringPreferencesKey("user_role")
 
     fun getToken(): Flow<String> {
         return dataStore.data.map { preferences ->
@@ -20,6 +21,18 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
     suspend fun saveToken(token: String) {
         dataStore.edit { preferences ->
             preferences[key] = token
+        }
+    }
+
+    fun getRole(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[userRole] ?: ""
+        }
+    }
+
+    suspend fun setRole(role: String) {
+        dataStore.edit { preferences ->
+            preferences[userRole] = role
         }
     }
 

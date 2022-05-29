@@ -17,9 +17,25 @@ class UserPreferenceViewModel(private val pref: UserPreference): ViewModel() {
         }
     }
 
+    fun getRole(): LiveData<String> {
+        return pref.getRole().asLiveData()
+    }
+
+    fun setRole(role: String) {
+        viewModelScope.launch {
+            pref.setRole(role)
+        }
+    }
+
     fun deleteToken(){
         viewModelScope.launch {
             pref.saveToken("")
+        }
+    }
+
+    fun deleteRole(){
+        viewModelScope.launch {
+            pref.setRole("")
         }
     }
 }
