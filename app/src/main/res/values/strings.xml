@@ -30,6 +30,8 @@
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="logout_success">Logout Berhasil</string>
+    <string name="observe_button">Observe Button</string>
+    <string name="switch_camera">Switch Camera</string>
 
     <string-array name="roles">
         <item>CLIENT</item>

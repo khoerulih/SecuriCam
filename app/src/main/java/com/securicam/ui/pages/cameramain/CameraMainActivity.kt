@@ -14,16 +14,32 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.securicam.MainActivity
 import com.securicam.R
+import com.securicam.databinding.ActivityCameraMainBinding
+import com.securicam.databinding.ActivityObserveBinding
 import com.securicam.ui.ViewModelFactory
 import com.securicam.ui.pages.login.LoginActivity
+import com.securicam.ui.pages.observe.ObserveActivity
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
+
 class CameraMainActivity : AppCompatActivity() {
+
+    private var _binding: ActivityCameraMainBinding? = null
+    private val binding get() = _binding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera_main)
+        _binding = ActivityCameraMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
+
+        binding?.fabStartObserve?.setOnClickListener {
+            val intent = Intent(this, ObserveActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SecuriCam"
         tools:targetApi="31">
         <activity
+            android:name=".ui.pages.observe.ObserveActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.pages.cameramain.CameraMainActivity"
             android:exported="false" />
         <activity
