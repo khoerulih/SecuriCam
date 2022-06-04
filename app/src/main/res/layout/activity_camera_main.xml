@@ -7,13 +7,38 @@
     tools:context=".ui.pages.cameramain.CameraMainActivity">
 
     <TextView
+        android:id="@+id/tv_list_connection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Connection"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_connection"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:text="CAMERA"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_list_connection" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_start_observe"
@@ -25,7 +50,7 @@
         android:contentDescription="@string/observe_button"
         android:text="Start Observe"
         android:textColor="@android:color/white"
-        app:backgroundTint="@color/blue_300"
+        app:backgroundTint="@color/blue_500"
         app:iconTint="@android:color/holo_red_light"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,6 +20,10 @@
         android:theme="@style/Theme.SecuriCam"
         tools:targetApi="31">
         <activity
+            android:name=".ui.pages.requestpair.RequestPairActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.pages.cameramain.CameraMainActivity"/>
+        <activity
             android:name=".ui.pages.observe.ObserveActivity"
             android:exported="false" />
         <activity
@@ -33,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.pages.login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.splash.SplashScreenActivity"

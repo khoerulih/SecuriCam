@@ -32,6 +32,8 @@
     <string name="logout_success">Logout Berhasil</string>
     <string name="observe_button">Observe Button</string>
     <string name="switch_camera">Switch Camera</string>
+    <string name="user_avatar">avatar</string>
+    <string name="request">Request Pairing</string>
 
     <string-array name="roles">
         <item>CLIENT</item>
