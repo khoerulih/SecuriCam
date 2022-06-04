@@ -45,8 +45,15 @@ class ClientMainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem):Boolean {
         when(item.itemId) {
+            R.id.ic_device -> {
+                val device = Intent(this, ListDeviceActivity::class.java)
+                startActivity(device)
+                finish()
+                return true
+            }
+
             R.id.logout -> {
                 val pref = UserPreference.getInstance(dataStore)
                 val userPreferenceViewModel =
@@ -73,7 +80,7 @@ class ClientMainActivity : AppCompatActivity() {
             }
             else -> return true
         }
-    }
+        }
 
     companion object {
         fun clientMainActivityIntent(context: Context): Intent {

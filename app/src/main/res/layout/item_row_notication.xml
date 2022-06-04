@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cadangan"
+        android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_detected"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="2dp"
+            card_view:civ_border_color="@color/blue_100"
+            card_view:civ_border_width="2dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.05"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="1.0"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_detected"
+            android:layout_width="98dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="16dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.139"
+            card_view:layout_constraintStart_toEndOf="@+id/img_detected"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/detected" />
+
+        <TextView
+            android:id="@id/tv_cam_device"
+            android:layout_width="250dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="@+id/tv_detected"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintStart_toStartOf="@+id/tv_detected"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_detected"
+            card_view:layout_constraintVertical_bias="0.0"
+            tools:text="@string/device" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.content.ContextCompat.startActivity
 import com.securicam.ui.pages.cameramain.CameraMainActivity
 import com.securicam.ui.pages.clientmain.ClientMainActivity
+import com.securicam.ui.pages.clientmain.ListDeviceActivity
 import com.securicam.ui.pages.login.LoginActivity
 import com.securicam.ui.pages.register.RegisterActivity
 
@@ -16,6 +17,8 @@ fun goToClientMainActivity(context: Context) {
     val intent = ClientMainActivity.clientMainActivityIntent(context)
     context.startActivity(intent)
 }
+
+
 
 fun goToCameraMainActivity(context: Context) {
     val intent = CameraMainActivity.cameraMainActivityIntent(context)
