@@ -1,24 +1,21 @@
 package com.securicam.data.retrofit
 
-import com.securicam.data.responses.LoginData
-import com.securicam.data.responses.LoginResponse
-import com.securicam.data.responses.RegisterResponse
-import com.securicam.data.responses.SearchCameraResponse
+import com.securicam.data.responses.*
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("users")
-    fun getUsers() : Call<List<LoginData>>
+    @GET("user/connections")
+    fun getUsers(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String
+    ) : Call<CameraConnectionResponse>
 
     @FormUrlEncoded
     @GET("user/search")
     fun search(
-        @Field("username") username: String
+        @Query("email")  username: String
     ): Call<SearchCameraResponse>
 
     @FormUrlEncoded

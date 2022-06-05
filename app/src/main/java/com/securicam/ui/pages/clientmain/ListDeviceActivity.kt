@@ -7,29 +7,56 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.activity.viewModels
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.securicam.R
+import com.securicam.data.responses.ListConnection
 import com.securicam.data.responses.LoginData
 import com.securicam.databinding.ActivityListDeviceBinding
+import com.securicam.ui.ViewModelFactory
 import com.securicam.ui.pages.login.LoginActivity
+import com.securicam.utils.UserPreference
+import com.securicam.utils.UserPreferenceViewModel
+import com.securicam.utils.goToLoginActivity
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class ListDeviceActivity : AppCompatActivity() {
 
     private var _binding : ActivityListDeviceBinding? = null
     private val binding get() = _binding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         _binding = ActivityListDeviceBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        val pref = UserPreference.getInstance(dataStore)
+        val userPreferenceViewModel =
+            ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance(application, pref)
+            )[UserPreferenceViewModel::class.java]
+
+        val cameraViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[CameraSearchViewModel::class.java]
+
+        userPreferenceViewModel.getToken().observe(this){ token ->
+            if(token.isNullOrEmpty()){
+                goToLoginActivity(this)
+            } else {
+                cameraViewModel.getAllCameraConnection(token)
+            }
+        }
+
         binding?.rvDevice?.setHasFixedSize(true)
-        val deviceViewModel = ViewModelProvider(this)[CameraSearchViewModel::class.java]
         val layoutManager = LinearLayoutManager(this)
         binding?.rvDevice?.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
@@ -44,21 +71,21 @@ class ListDeviceActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.hint_text)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                deviceViewModel.searchCamera(query)
+                cameraViewModel.searchCamera(query)
                 binding?.searchEditText?.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
                 if (query.isNullOrBlank()) {
-                    deviceViewModel.showListCamera()
+                    cameraViewModel.getAllCameraConnection("Bearer")
                 }
                 return true
             }
         })
 
-        deviceViewModel.listUser.observe(this) { listCameras ->
-            setListData(listCameras)
+        cameraViewModel.listConnection.observe(this) { listCameraConnection ->
+            setListCameraConnection(listCameraConnection)
         }
 
     }
@@ -69,20 +96,16 @@ class ListDeviceActivity : AppCompatActivity() {
         _binding = null
     }
 
-    private fun setListData(listCameras: List<LoginData>) {
-        val users = ArrayList<LoginData>()
-        for (user in listCameras) {
-            val list = LoginData(
-                user.id,
-                user.email,
-                user.username,
-                user.password,
-                user.role,
-                user.accessToken
+    private fun setListCameraConnection(listConnection : List<ListConnection>) {
+        val connections = ArrayList<ListConnection>()
+        for (connection in listConnection) {
+            val list = ListConnection(
+                connection.time,
+                connection.connectionDetail
             )
-            users.add(list)
+            connections.add(list)
         }
-        val adapter = CameraAdapter(users)
+        val adapter = CameraAdapter(connections)
         binding?.rvDevice?.adapter = adapter
     }
 

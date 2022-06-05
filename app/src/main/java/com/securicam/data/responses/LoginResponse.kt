@@ -5,11 +5,6 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 
-data class SearchCameraResponse(
-	@field:SerializedName("items")
-	val items: List<LoginData>
-)
-
 data class LoginResponse(
 
 	@field:SerializedName("data")
