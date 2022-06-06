@@ -2,10 +2,7 @@ package com.securicam.data.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchCameraResponse(
-    @field:SerializedName("items")
-    val items: List<ListConnection>
-)
+
 
 data class CameraConnectionResponse(
     @field:SerializedName("data")

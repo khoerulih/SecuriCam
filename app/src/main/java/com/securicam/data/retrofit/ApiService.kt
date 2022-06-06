@@ -6,6 +6,11 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    @GET("user/all")
+    fun getAllUsers(
+        @Header("Authorization") token: String,
+    ) : Call<List<ListCamera>>
+
     @GET("user/connections")
     fun getUsers(
         @Header("Authorization") token: String,
@@ -13,7 +18,7 @@ interface ApiService {
     ) : Call<CameraConnectionResponse>
 
     @FormUrlEncoded
-    @GET("user/search")
+    @GET("/user/search")
     fun search(
         @Query("email")  username: String
     ): Call<SearchCameraResponse>

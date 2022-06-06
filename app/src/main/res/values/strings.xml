@@ -35,6 +35,7 @@
     <string name="status">Connected</string>
     <string name="hint_text">Search Device</string>
     <string name="connected">Connected</string>
+    <string name="search">Search</string>
     <string name="set_connect">Request Connection</string>
     <!--<string name=""></string>-->
 

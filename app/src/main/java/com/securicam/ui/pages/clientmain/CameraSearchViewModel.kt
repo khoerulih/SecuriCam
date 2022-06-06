@@ -5,28 +5,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.securicam.data.responses.CameraConnectionResponse
-import com.securicam.data.responses.ListConnection
-import com.securicam.data.responses.LoginData
-import com.securicam.data.responses.SearchCameraResponse
+import com.securicam.data.responses.*
 import com.securicam.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class CameraSearchViewModel: ViewModel() {
-    private val _listCamera = MutableLiveData<List<ListConnection>>()
+    private val _listCamera = MutableLiveData<List<ListCamera>>()
     private val _listConnection = MutableLiveData<List<ListConnection>>()
+
+    val listCamera: LiveData<List<ListCamera>> = _listCamera
     val listConnection: LiveData<List<ListConnection>> = _listConnection
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
 
     fun getAllCameraConnection(token: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getUsers("Bearer $token", token)
         client.enqueue(object : Callback<CameraConnectionResponse> {
             override fun onResponse(call: Call<CameraConnectionResponse>, response: Response<CameraConnectionResponse>) {
+                Log.d("response check ", "" + response.body()?.listConnection.toString())
                 if (response.isSuccessful) {
                     _isLoading.value = false
                     _listConnection.value = response.body()?.listConnection as List<ListConnection>
@@ -52,8 +53,9 @@ class CameraSearchViewModel: ViewModel() {
                 response: Response<SearchCameraResponse>
             ) {
                 _isLoading.value = false
+                Log.d("response check ", "" + response.body()?.listCamera.toString())
                 if (response.isSuccessful) {
-                    _listCamera.value = response.body()?.items
+                    _listCamera.value = response.body()?.listCamera as List<ListCamera>
                 } else {
                     Log.e(TAG, "onFailure : ${response.message()}")
                 }
@@ -65,7 +67,6 @@ class CameraSearchViewModel: ViewModel() {
             }
         })
     }
-
 
 
     companion object {

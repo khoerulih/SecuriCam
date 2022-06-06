@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.pages.clientmain.ListDeviceActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,21 +33,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="@string/hint_text" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <TextView
         android:id="@+id/tv_connect"
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:layout_marginStart="4dp"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/connected"
-        android:layout_marginStart="10dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.003">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002">
+
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -55,10 +56,10 @@
         style="@style/RecyclerView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_connect"
-        app:layout_constraintVertical_bias="0.103"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_row_devices" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

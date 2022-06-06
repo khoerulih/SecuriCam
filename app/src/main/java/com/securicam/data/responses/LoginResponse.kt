@@ -20,7 +20,7 @@ data class LoginResponse(
 @Parcelize
 data class LoginData(
 
-	/*@field:SerializedName("fcm")
+	/*@field:SerializedName("fMcm")
 	val fcm: Any,
 */
 	@field:SerializedName("id")

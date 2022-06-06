@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import androidx.activity.viewModels
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.securicam.R
+import com.securicam.data.responses.ListCamera
 import com.securicam.data.responses.ListConnection
 import com.securicam.data.responses.LoginData
 import com.securicam.databinding.ActivityListDeviceBinding
@@ -43,7 +46,7 @@ class ListDeviceActivity : AppCompatActivity() {
                 ViewModelFactory.getInstance(application, pref)
             )[UserPreferenceViewModel::class.java]
 
-        val cameraViewModel = ViewModelProvider(
+        val cameraViewModel1 = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[CameraSearchViewModel::class.java]
@@ -52,7 +55,7 @@ class ListDeviceActivity : AppCompatActivity() {
             if(token.isNullOrEmpty()){
                 goToLoginActivity(this)
             } else {
-                cameraViewModel.getAllCameraConnection(token)
+                cameraViewModel1.getAllCameraConnection(token)
             }
         }
 
@@ -62,33 +65,70 @@ class ListDeviceActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding?.rvDevice?.addItemDecoration(itemDecoration)
 
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = SearchView(this)
-        binding?.searchEditText?.addView(searchView)
-        binding?.searchEditText?.visibility = View.VISIBLE
 
+        cameraViewModel1.listConnection.observe(this) { listCameraConnection ->
+            setListCameraConnection(listCameraConnection)
+        }
+
+        cameraViewModel1.listCamera.observe(this) { listCamera ->
+            setListCamera(listCamera)
+        }
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val pref = UserPreference.getInstance(dataStore)
+        val userPreferenceViewModel =
+            ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance(application, pref)
+            )[UserPreferenceViewModel::class.java]
+
+        val cameraViewModel1 = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[CameraSearchViewModel::class.java]
+
+        userPreferenceViewModel.getToken().observe(this){ token ->
+            if(token.isNullOrEmpty()){
+                goToLoginActivity(this)
+            } else {
+                cameraViewModel1.getAllCameraConnection(token)
+            }
+        }
+
+        val inflater = menuInflater
+        inflater.inflate(R.menu.device_option_menu, menu)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu!!.findItem(R.id.ic_device).actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.hint_text)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                cameraViewModel.searchCamera(query)
-                binding?.searchEditText?.clearFocus()
+                cameraViewModel1.searchCamera(query)
+                searchView.clearFocus()
                 return true
             }
 
-            override fun onQueryTextChange(query: String?): Boolean {
-                if (query.isNullOrBlank()) {
-                    cameraViewModel.getAllCameraConnection("Bearer")
-                }
-                return true
+            override fun onQueryTextChange(newText: String?): Boolean {
+               return false
             }
         })
 
-        cameraViewModel.listConnection.observe(this) { listCameraConnection ->
-            setListCameraConnection(listCameraConnection)
-        }
-
+        return true
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.ic_device -> {
+                return true
+            }
+
+            else -> throw IllegalArgumentException("Unknown menu item: " + item.itemId)
+        }
+    }
+
+
 
 
     override fun onDestroy() {
@@ -106,6 +146,20 @@ class ListDeviceActivity : AppCompatActivity() {
             connections.add(list)
         }
         val adapter = CameraAdapter(connections)
+        binding?.rvDevice?.adapter = adapter
+    }
+
+    private fun setListCamera(listCamera: List<ListCamera>) {
+        val connections = ArrayList<ListCamera>()
+        for (connection in listCamera) {
+            val list = ListCamera(
+                connection.id,
+                connection.email,
+                connection.username
+            )
+            connections.add(list)
+        }
+        val adapter = CameraSearchAdapter(connections)
         binding?.rvDevice?.adapter = adapter
     }
 
