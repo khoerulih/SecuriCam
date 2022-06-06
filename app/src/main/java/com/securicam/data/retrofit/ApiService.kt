@@ -1,9 +1,6 @@
 package com.securicam.data.retrofit
 
-import com.securicam.data.responses.CameraConnectionResponse
-import com.securicam.data.responses.PairingRequestResponse
-import com.securicam.data.responses.LoginResponse
-import com.securicam.data.responses.RegisterResponse
+import com.securicam.data.responses.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -35,4 +32,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Header("x-access-token") accessToken: String,
     ): Call<PairingRequestResponse>
+
+    @POST("pair/accept")
+    fun acceptPairRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Query("id") pairId: String,
+    ): Call<AcceptPairRequestResponse>
 }

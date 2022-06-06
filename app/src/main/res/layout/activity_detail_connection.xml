@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.pages.detailconection.DetailConnectionActivity">
+
+    <ImageView
+        android:id="@+id/img_detail_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_user"
+        android:transitionName="detail_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_detail_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:transitionName="detail_username"
+        app:layout_constraintEnd_toEndOf="@id/img_detail_avatar"
+        app:layout_constraintStart_toStartOf="@id/img_detail_avatar"
+        app:layout_constraintTop_toBottomOf="@id/img_detail_avatar"
+        tools:text="Fulan" />
+
+    <TextView
+        android:id="@+id/tv_detail_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:transitionName="detail_email"
+        app:layout_constraintEnd_toEndOf="@id/img_detail_avatar"
+        app:layout_constraintStart_toStartOf="@id/img_detail_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_username"
+        tools:text="Fulan@gmail.com" />
+
+    <Button
+        android:id="@+id/btn_reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:drawableLeft="@drawable/ic_close_24"
+        android:text="Remove Connection"
+        app:layout_constraintEnd_toEndOf="@id/tv_detail_email"
+        app:layout_constraintStart_toStartOf="@id/tv_detail_email"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_email" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

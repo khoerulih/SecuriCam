@@ -73,16 +73,19 @@ class RequestPairActivity : AppCompatActivity() {
     private fun setListRequestPair(listRequestPair : List<ListRequestPair>) {
         val requestPair = ArrayList<ListRequestPair>()
         for (listRequest in listRequestPair) {
-            val list = ListRequestPair(
-                listRequest.senderId,
-                listRequest.accepted,
-                listRequest.id,
-                listRequest.time,
-                listRequest.recieverId,
-                listRequest.clientDetail,
-                listRequest.camDetail
-            )
-            requestPair.add(list)
+            if(!listRequest.accepted){
+                val list = ListRequestPair(
+                    listRequest.senderId,
+                    listRequest.accepted,
+                    listRequest.id,
+                    listRequest.time,
+                    listRequest.recieverId,
+                    listRequest.clientDetail,
+                    listRequest.camDetail
+                )
+                requestPair.add(list)
+            }
+
         }
         val adapter = ListRequestPairAdapter(requestPair)
         binding?.rvRequestPair?.adapter = adapter

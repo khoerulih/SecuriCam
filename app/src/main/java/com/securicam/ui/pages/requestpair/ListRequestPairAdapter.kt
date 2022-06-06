@@ -1,17 +1,24 @@
 package com.securicam.ui.pages.requestpair
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.securicam.data.responses.ListRequestPair
 import com.securicam.databinding.ItemRowRequestPairBinding
+import com.securicam.ui.pages.detailrequestpair.DetailRequestPairActivity
 
-class ListRequestPairAdapter(private val listRequestPair: List<ListRequestPair>): RecyclerView.Adapter<ListRequestPairAdapter.ListViewHolder>() {
+class ListRequestPairAdapter(private val listRequestPair: List<ListRequestPair>) :
+    RecyclerView.Adapter<ListRequestPairAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ):ListViewHolder {
-        val binding = ItemRowRequestPairBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    ): ListViewHolder {
+        val binding =
+            ItemRowRequestPairBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
@@ -21,21 +28,21 @@ class ListRequestPairAdapter(private val listRequestPair: List<ListRequestPair>)
 
     override fun getItemCount(): Int = listRequestPair.size
 
-    class ListViewHolder(private val binding: ItemRowRequestPairBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ListViewHolder(private val binding: ItemRowRequestPairBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(dataRequest: ListRequestPair) {
             binding.tvItemUsername.text = dataRequest.clientDetail.username
             binding.tvItemEmail.text = dataRequest.clientDetail.email
-//            itemView.setOnClickListener {
-//                val goToDetailActivity = Intent(itemView.context, DetailStoryActivity::class.java)
-//                goToDetailActivity.putExtra(DetailStoryActivity.EXTRA_STORY, dataStory)
-//
-//                val optionsCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                    itemView.context as Activity,
-//                    Pair(binding.ivItemThumbnail, "detail_thumbnail"),
-//                    Pair(binding.tvItemName, "detail_name")
-//                )
-//                itemView.context.startActivity(goToDetailActivity, optionsCompat.toBundle())
-//            }
+            itemView.setOnClickListener {
+                val goToDetailRequestPairActivity =
+                    Intent(itemView.context, DetailRequestPairActivity::class.java)
+                goToDetailRequestPairActivity.putExtra(
+                    DetailRequestPairActivity.EXTRA_DATA_REQUEST_PAIR,
+                    dataRequest
+                )
+
+                itemView.context.startActivity(goToDetailRequestPairActivity)
+            }
         }
     }
 }
