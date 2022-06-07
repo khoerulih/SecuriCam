@@ -9,7 +9,7 @@ interface ApiService {
     @GET("user/all")
     fun getAllUsers(
         @Header("Authorization") token: String,
-    ) : Call<List<ListCamera>>
+    ) : Call<SearchCameraResponse>
 
     @GET("user/connections")
     fun getUsers(
@@ -17,9 +17,11 @@ interface ApiService {
         @Header("x-access-token") accessToken: String
     ) : Call<CameraConnectionResponse>
 
-    @FormUrlEncoded
-    @GET("/user/search")
+
+    @GET("user/search")
     fun search(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
         @Query("email")  username: String
     ): Call<SearchCameraResponse>
 

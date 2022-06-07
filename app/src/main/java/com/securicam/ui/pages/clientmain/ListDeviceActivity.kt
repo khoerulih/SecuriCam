@@ -34,6 +34,8 @@ class ListDeviceActivity : AppCompatActivity() {
     private var _binding : ActivityListDeviceBinding? = null
     private val binding get() = _binding
 
+    private lateinit var accessToken: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityListDeviceBinding.inflate(layoutInflater)
@@ -94,7 +96,7 @@ class ListDeviceActivity : AppCompatActivity() {
             if(token.isNullOrEmpty()){
                 goToLoginActivity(this)
             } else {
-                cameraViewModel1.getAllCameraConnection(token)
+                accessToken = token
             }
         }
 
@@ -106,7 +108,7 @@ class ListDeviceActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.hint_text)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                cameraViewModel1.searchCamera(query)
+                cameraViewModel1.searchCamera(accessToken, query)
                 searchView.clearFocus()
                 return true
             }

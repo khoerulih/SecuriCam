@@ -44,9 +44,9 @@ class CameraSearchViewModel: ViewModel() {
         })
     }
 
-    fun searchCamera(username: String) {
+    fun searchCamera(token: String,username: String) {
         _isLoading.value = true
-        val client = ApiConfig.getApiService().search(username)
+        val client = ApiConfig.getApiService().search("Bearer $token", token, username)
         client.enqueue(object : Callback<SearchCameraResponse> {
             override fun onResponse(
                 call: Call<SearchCameraResponse>,
