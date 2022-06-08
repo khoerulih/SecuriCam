@@ -1,7 +1,8 @@
 package com.securicam.data.responses
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-
+import kotlinx.parcelize.Parcelize
 
 
 data class CameraConnectionResponse(
@@ -24,11 +25,12 @@ data class ListConnection(
     val connectionDetail: ConnectionDetail
 )
 
+@Parcelize
 data class ConnectionDetail(
 
-    @field:SerializedName("fcm")
+    /*@field:SerializedName("fcm")
     val fcm: Any,
-
+*/
     @field:SerializedName("role")
     val role: String,
 
@@ -43,4 +45,4 @@ data class ConnectionDetail(
 
     @field:SerializedName("username")
     val username: String
-)
+) : Parcelable

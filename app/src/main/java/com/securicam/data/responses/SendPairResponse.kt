@@ -4,9 +4,10 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-data class SearchCameraResponse(
+class SendPairResponse (
+
     @field:SerializedName("data")
-    val listCamera: List<ListCamera>,
+    val listRequestPair: ClientDetail,
 
     @field:SerializedName("success")
     val success: Boolean,
@@ -16,7 +17,17 @@ data class SearchCameraResponse(
 )
 
 @Parcelize
-data class ListCamera (
+data class ClientDetail(
+
+    @field:SerializedName("fcm")
+    val fcm: String? = null,
+
+    @field:SerializedName("role")
+    val role: String,
+
+    @field:SerializedName("lastLoggedIn")
+    val lastLoggedIn: Long,
+
     @field:SerializedName("id")
     val id: String,
 
@@ -25,4 +36,5 @@ data class ListCamera (
 
     @field:SerializedName("username")
     val username: String
-    ) : Parcelable
+) : Parcelable
+

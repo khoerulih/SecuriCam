@@ -1,10 +1,12 @@
 package com.securicam.ui.pages.clientmain
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.securicam.data.responses.ListCamera
 import com.securicam.databinding.ItemRowDevicesBinding
+import com.securicam.ui.pages.sendpairing.RequestConnectToCamActivity
 
 class CameraSearchAdapter(private val listCamera: List<ListCamera>): RecyclerView.Adapter<CameraSearchAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(
@@ -25,18 +27,16 @@ class CameraSearchAdapter(private val listCamera: List<ListCamera>): RecyclerVie
         fun bind(dataConnection: ListCamera) {
             binding.imgDetected
             binding.tvCamDevice.text = dataConnection.username
-            //binding.tvItemEmail.text = dataConnection.connectionDetail.email
-//            itemView.setOnClickListener {
-//                val goToDetailActivity = Intent(itemView.context, DetailStoryActivity::class.java)
-//                goToDetailActivity.putExtra(DetailStoryActivity.EXTRA_STORY, dataStory)
-//
-//                val optionsCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                    itemView.context as Activity,
-//                    Pair(binding.ivItemThumbnail, "detail_thumbnail"),
-//                    Pair(binding.tvItemName, "detail_name")
-//                )
-//                itemView.context.startActivity(goToDetailActivity, optionsCompat.toBundle())
-//            }
+            itemView.setOnClickListener {
+                val goToRequestConnectToCamActivity =
+                    Intent(itemView.context, RequestConnectToCamActivity::class.java)
+                goToRequestConnectToCamActivity.putExtra(
+                    RequestConnectToCamActivity.EXTRA_DATA_SEND_PAIR,
+                    dataConnection
+                )
+
+                itemView.context.startActivity(goToRequestConnectToCamActivity)
+            }
         }
     }
 }

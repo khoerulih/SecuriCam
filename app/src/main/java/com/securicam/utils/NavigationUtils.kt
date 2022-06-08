@@ -7,6 +7,7 @@ import com.securicam.ui.pages.clientmain.ClientMainActivity
 import com.securicam.ui.pages.clientmain.ListDeviceActivity
 import com.securicam.ui.pages.login.LoginActivity
 import com.securicam.ui.pages.register.RegisterActivity
+import com.securicam.ui.pages.sendpairing.RequestConnectToCamActivity
 
 fun goToLoginActivity(context: Context) {
     val intent = LoginActivity.loginActivityIntent(context)
@@ -18,7 +19,10 @@ fun goToClientMainActivity(context: Context) {
     context.startActivity(intent)
 }
 
-
+fun goToRequestConnectToCamActivity(context: Context) {
+    val intent = RequestConnectToCamActivity.requestConnectToCamActivityIntent(context)
+    context.startActivity(intent)
+}
 
 fun goToCameraMainActivity(context: Context) {
     val intent = CameraMainActivity.cameraMainActivityIntent(context)
