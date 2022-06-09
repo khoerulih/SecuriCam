@@ -15,7 +15,7 @@ data class CameraConnectionResponse(
     @field:SerializedName("message")
     val message: String
 )
-
+@Parcelize
 data class ListConnection(
 
     @field:SerializedName("time")
@@ -23,7 +23,7 @@ data class ListConnection(
 
     @field:SerializedName("user")
     val connectionDetail: ConnectionDetail
-)
+) : Parcelable
 
 @Parcelize
 data class ConnectionDetail(

@@ -5,17 +5,66 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
+import com.securicam.data.responses.ListCamera
+import com.securicam.data.responses.ListConnection
+import com.securicam.databinding.ActivityRequestConnectToCamBinding
+import com.securicam.ui.ViewModelFactory
 import com.securicam.ui.pages.clientmain.ClientMainActivity
+import com.securicam.utils.UserPreference
+import com.securicam.utils.UserPreferenceViewModel
+import com.securicam.utils.goToLoginActivity
 
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class RequestConnectToCamActivity : AppCompatActivity() {
-    @SuppressLint("StringFormatInvalid")
+    private var _binding: ActivityRequestConnectToCamBinding? = null
+    private val binding get() = _binding
+    private lateinit var accessToken: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_request_connect_to_cam)
+        _binding = ActivityRequestConnectToCamBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
+        val pref = UserPreference.getInstance(dataStore)
+        val userPreferenceViewModel =
+            ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance(application, pref)
+            )[UserPreferenceViewModel::class.java]
+
+        userPreferenceViewModel.getToken().observe(this) { token ->
+            if (token.isNullOrEmpty()) {
+                goToLoginActivity(this)
+            } else {
+                accessToken = token
+            }
+        }
+
+        val dataCamera = intent.getParcelableExtra<ListConnection>(EXTRA_DATA_SEND_PAIR)
+
+       /* binding?.tvDetailUsername?.text = dataCamera?.connectionDetail?.username
+        binding?.tvDetailEmail?.text = dataCamera?.connectionDetail?.email
+        */
+        binding?.tvCamDevice?.text = dataCamera?.connectionDetail?.username
 
         supportActionBar?.title = "Connected Request"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+    }
+
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.progressBar?.visibility = View.VISIBLE
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
     }
 
     companion object {
