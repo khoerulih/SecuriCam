@@ -14,6 +14,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
 import com.securicam.ui.ViewModelFactory
+import com.securicam.ui.pages.clientdetail.ClientDetailActivity
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToLoginActivity
@@ -50,6 +51,13 @@ class ClientMainActivity : AppCompatActivity() {
             R.id.ic_device -> {
                 val device = Intent(this, ListDeviceActivity::class.java)
                 startActivity(device)
+                finish()
+                return true
+            }
+
+            R.id.account -> {
+                val account = Intent(this, ClientDetailActivity::class.java)
+                startActivity(account)
                 finish()
                 return true
             }

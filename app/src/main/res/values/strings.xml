@@ -36,7 +36,9 @@
     <string name="hint_text">Search Device</string>
     <string name="connected">Connected</string>
     <string name="search">Search</string>
+    <string name="alert">There is someone in front of your home!</string>
     <string name="set_connect">Request Connection</string>
+    <string name="set_disconnect">Disconnect</string>
     <!--<string name=""></string>-->
 
     <string-array name="roles">

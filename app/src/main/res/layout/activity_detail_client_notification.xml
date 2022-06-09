@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pages.clientmain.DetailClientNotification">
+    tools:context=".ui.pages.notification.DetailClientNotification">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_detected"
@@ -21,10 +21,10 @@
     <TextView
         android:id="@+id/tv_detected"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/img_detected"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,19 +34,35 @@
 
     <TextView
         android:id="@+id/tv_cam_device"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_detected"
+        app:layout_constraintStart_toStartOf="@id/tv_detected"
+        app:layout_constraintTop_toBottomOf="@id/tv_detected"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/device" />
+
+    <TextView
+        android:id="@+id/tv_alert"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-thin"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/tv_detected"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/tv_detected"
-        app:layout_constraintTop_toBottomOf="@id/tv_detected"
-        tools:text="@string/device" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_cam_device"
+        app:layout_constraintStart_toStartOf="@id/tv_cam_device"
+        app:layout_constraintTop_toBottomOf="@id/tv_cam_device"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/alert" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.securicam.data.responses.ListCamera
 import com.securicam.databinding.ItemRowDevicesBinding
-import com.securicam.ui.pages.sendpairing.RequestConnectToCamActivity
+import com.securicam.ui.pages.requestconnection.RequestConnectToCamActivity
 
 class CameraSearchAdapter(private val listCamera: List<ListCamera>): RecyclerView.Adapter<CameraSearchAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(

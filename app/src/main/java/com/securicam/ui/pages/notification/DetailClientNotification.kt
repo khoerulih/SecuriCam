@@ -1,4 +1,4 @@
-package com.securicam.ui.pages.clientmain
+package com.securicam.ui.pages.notification
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

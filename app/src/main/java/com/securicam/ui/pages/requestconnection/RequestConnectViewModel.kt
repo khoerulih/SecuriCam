@@ -1,4 +1,4 @@
-package com.securicam.ui.pages.sendpairing
+package com.securicam.ui.pages.requestconnection
 
 import android.util.Log
 import androidx.lifecycle.LiveData

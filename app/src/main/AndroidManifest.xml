@@ -20,13 +20,19 @@
         android:theme="@style/Theme.SecuriCam"
         tools:targetApi="31">
         <activity
-            android:name=".ui.pages.sendpairing.RequestConnectToCamActivity"
+            android:name=".ui.pages.clientdetail.ClientDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pages.disconnected.DisconnectedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pages.requestconnection.RequestConnectToCamActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.clientmain.ListDeviceActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.pages.clientmain.DetailClientNotification"
+            android:name=".ui.pages.notification.DetailClientNotification"
             android:exported="false" />
         <activity
             android:name=".ui.pages.cameramain.CameraMainActivity"

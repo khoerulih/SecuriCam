@@ -1,21 +1,12 @@
 package com.securicam.ui.pages.clientmain
 
-import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
-import com.securicam.R
 import com.securicam.data.responses.ListConnection
-import com.securicam.data.responses.LoginData
-import com.securicam.data.responses.LoginResponse
 import com.securicam.databinding.ItemRowDevicesBinding
-import com.securicam.ui.pages.sendpairing.RequestConnectToCamActivity
+import com.securicam.ui.pages.disconnected.DisconnectedActivity
 
 class CameraAdapter(private val listConnection: List<ListConnection>): RecyclerView.Adapter<CameraAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(
@@ -36,14 +27,14 @@ class CameraAdapter(private val listConnection: List<ListConnection>): RecyclerV
         fun bind(dataConnection: ListConnection) {
             binding.tvCamDevice.text = dataConnection.connectionDetail.username
             itemView.setOnClickListener {
-                val goToRequestConnectToCamActivity =
-                    Intent(itemView.context, RequestConnectToCamActivity::class.java)
-                goToRequestConnectToCamActivity.putExtra(
-                    RequestConnectToCamActivity.EXTRA_DATA_SEND_PAIR,
+                val goToDisconnectActivity =
+                    Intent(itemView.context, DisconnectedActivity::class.java)
+                goToDisconnectActivity.putExtra(
+                    DisconnectedActivity.EXTRA_DATA_DISCONNECT,
                     dataConnection
                 )
 
-                itemView.context.startActivity(goToRequestConnectToCamActivity)
+                itemView.context.startActivity(goToDisconnectActivity)
             }
         }
     }

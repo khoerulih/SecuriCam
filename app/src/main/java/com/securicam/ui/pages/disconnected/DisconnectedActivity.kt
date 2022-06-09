@@ -1,6 +1,5 @@
-package com.securicam.ui.pages.sendpairing
+package com.securicam.ui.pages.disconnected
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,26 +9,24 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.securicam.R
-import com.securicam.data.responses.ListCamera
 import com.securicam.data.responses.ListConnection
-import com.securicam.databinding.ActivityRequestConnectToCamBinding
+import com.securicam.databinding.ActivityDisconnectedBinding
 import com.securicam.ui.ViewModelFactory
-import com.securicam.ui.pages.clientmain.ClientMainActivity
+import com.securicam.ui.pages.requestconnection.RequestConnectToCamActivity
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToLoginActivity
 
-
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-class RequestConnectToCamActivity : AppCompatActivity() {
-    private var _binding: ActivityRequestConnectToCamBinding? = null
+class DisconnectedActivity : AppCompatActivity() {
+    private var _binding: ActivityDisconnectedBinding? = null
     private val binding get() = _binding
     private lateinit var accessToken: String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityRequestConnectToCamBinding.inflate(layoutInflater)
+        _binding = ActivityDisconnectedBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         val pref = UserPreference.getInstance(dataStore)
         val userPreferenceViewModel =
@@ -46,12 +43,12 @@ class RequestConnectToCamActivity : AppCompatActivity() {
             }
         }
 
-        val dataCamera = intent.getParcelableExtra<ListConnection>(EXTRA_DATA_SEND_PAIR)
+        val dataConnection = intent.getParcelableExtra<ListConnection>(DisconnectedActivity.EXTRA_DATA_DISCONNECT)
 
-       /* binding?.tvDetailUsername?.text = dataCamera?.connectionDetail?.username
-        binding?.tvDetailEmail?.text = dataCamera?.connectionDetail?.email
-        */
-        binding?.tvCamDevice?.text = dataCamera?.connectionDetail?.username
+        /* binding?.tvDetailUsername?.text = dataCamera?.connectionDetail?.username
+         binding?.tvDetailEmail?.text = dataCamera?.connectionDetail?.email
+         */
+        binding?.tvCamDevice?.text = dataConnection?.connectionDetail?.username
 
         supportActionBar?.title = "Connected Request"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -68,11 +65,11 @@ class RequestConnectToCamActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val EXTRA_DATA_DISCONNECT = "extra_data_disconnect"
 
-        const val EXTRA_DATA_SEND_PAIR = "extra_data_send_pair"
-
-        fun requestConnectToCamActivityIntent(context: Context): Intent {
-            return Intent(context, RequestConnectToCamActivity::class.java)
+        fun disconnectActivityIntent(context: Context): Intent {
+            return Intent(context, DisconnectedActivity::class.java)
         }
+
     }
 }

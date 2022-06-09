@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pages.requestconnection.RequestConnectToCamActivity">
+    tools:context=".ui.pages.disconnected.DisconnectedActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_detected"
@@ -52,7 +52,7 @@
         android:layout_width="220dp"
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
-        android:text="@string/set_connect"
+        android:text="@string/set_disconnect"
         app:layout_constraintEnd_toEndOf="@id/tv_status_connect"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="@id/tv_status_connect"
@@ -72,5 +72,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
