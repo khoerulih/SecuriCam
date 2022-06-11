@@ -33,7 +33,7 @@
         tools:text="@string/device"/>
 
     <TextView
-        android:id="@+id/tv_status_connect"
+        android:id="@+id/tv_email_cam"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -47,16 +47,32 @@
         app:layout_constraintTop_toBottomOf="@id/tv_cam_device"
         tools:text="@string/status" />
 
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-thin"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/tv_email_cam"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/tv_email_cam"
+        app:layout_constraintTop_toBottomOf="@id/tv_email_cam"
+        tools:text="@string/email_cam" />
+
     <Button
         android:id="@+id/btn_request"
         android:layout_width="220dp"
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:text="@string/set_connect"
-        app:layout_constraintEnd_toEndOf="@id/tv_status_connect"
+        app:layout_constraintEnd_toEndOf="@id/tv_id"
         app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="@id/tv_status_connect"
-        app:layout_constraintTop_toBottomOf="@id/tv_status_connect" />
+        app:layout_constraintStart_toStartOf="@id/tv_id"
+        app:layout_constraintTop_toBottomOf="@id/tv_id"
+        tools:text="@string/id_cam"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

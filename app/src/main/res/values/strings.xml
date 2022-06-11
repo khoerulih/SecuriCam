@@ -8,7 +8,6 @@
     <string name="create_account">Don\'t have an Account ? Register</string>
     <string name="logo">Logo</string>
     <string name="list_notification">Notification</string>
-    <string name="login_sucess">Login Successfully</string>
     <string name="password_minimum">Password must be 6 characters or more.</string>
     <string name="password_empty">Password cannot be empty!!</string>
     <string name="name">Username</string>
@@ -28,7 +27,11 @@
     <string name="role">Set Device As</string>
     <string name="register_failed">Register Failed</string>
     <string name="register_success">Register success, you can Login</string>
+    <string name="request_failed">Request Failed</string>
+    <string name="request_success">Request success, you can Login</string>
     <string name="logout_confirmation">Are you sure?</string>
+    <string name="email_cam">Email</string>
+    <string name="id_cam">Id</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="logout_success">Logout Success</string>

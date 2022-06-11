@@ -42,11 +42,9 @@ interface ApiService {
     ): Call<RegisterResponse>
 
     @FormUrlEncoded
-    @POST("pair/accept")
+    @POST("pair/send")
     fun sendPairRequest(
-        @Header("Authorization") token: String,
-        @Header("x-access-token") accessToken: String,
-        @Query("receiver") receiver: String,
+        @Field("receiver") receiver: String,
     ): Call<SendPairResponse>
 
 }

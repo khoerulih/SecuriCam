@@ -27,6 +27,8 @@ class CameraSearchAdapter(private val listCamera: List<ListCamera>): RecyclerVie
         fun bind(dataConnection: ListCamera) {
             binding.imgDetected
             binding.tvCamDevice.text = dataConnection.username
+            dataConnection.email
+            dataConnection.id
             itemView.setOnClickListener {
                 val goToRequestConnectToCamActivity =
                     Intent(itemView.context, RequestConnectToCamActivity::class.java)

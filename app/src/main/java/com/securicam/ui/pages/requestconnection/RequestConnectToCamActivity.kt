@@ -5,10 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.securicam.R
 import com.securicam.data.responses.ListCamera
 import com.securicam.data.responses.ListConnection
 import com.securicam.databinding.ActivityRequestConnectToCamBinding
@@ -43,15 +45,47 @@ class RequestConnectToCamActivity : AppCompatActivity() {
             }
         }
 
+        val requestConnectViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[RequestConnectViewModel::class.java]
+
+        requestConnectViewModel.isError.observe(this) { error ->
+            showLoading(false)
+            if (error) {
+                Toast.makeText(this, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, getString(R.string.request_success), Toast.LENGTH_SHORT)
+                    .show()
+
+                goToLoginActivity(this)
+                finish()
+            }
+        }
+
+
         val dataCamera = intent.getParcelableExtra<ListCamera>(EXTRA_DATA_SEND_PAIR)
 
-       /* binding?.tvDetailUsername?.text = dataCamera?.connectionDetail?.username
-        binding?.tvDetailEmail?.text = dataCamera?.connectionDetail?.email
-        */
+        /* binding?.tvDetailUsername?.text = dataCamera?.connectionDetail?.username
+         binding?.tvDetailEmail?.text = dataCamera?.connectionDetail?.email
+         */
         binding?.tvCamDevice?.text = dataCamera?.username
+        binding?.tvEmailCam?.text = dataCamera?.email
+        binding?.tvId?.text = dataCamera?.id
+
+        binding?.btnRequest?.setOnClickListener{
+            val receiver = binding?.tvId?.text.toString()
+
+            requestConnectViewModel.sendPairRequest(receiver)
+            showLoading(true)
+
+        }
+
 
         supportActionBar?.title = "Connected Request"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
 
     }
 

@@ -26,6 +26,7 @@ class CameraAdapter(private val listConnection: List<ListConnection>): RecyclerV
     class ListViewHolder(private val binding: ItemRowDevicesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(dataConnection: ListConnection) {
             binding.tvCamDevice.text = dataConnection.connectionDetail.username
+            binding
             itemView.setOnClickListener {
                 val goToDisconnectActivity =
                     Intent(itemView.context, DisconnectedActivity::class.java)

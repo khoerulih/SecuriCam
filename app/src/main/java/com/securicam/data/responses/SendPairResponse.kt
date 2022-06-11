@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-class SendPairResponse (
+data class SendPairResponse (
 
     @field:SerializedName("data")
     val listRequestPair: ClientDetail,
