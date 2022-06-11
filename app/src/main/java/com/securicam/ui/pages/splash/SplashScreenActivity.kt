@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.securicam.R
 import com.securicam.databinding.ActivitySplashScreenBinding
 import com.securicam.ui.pages.login.LoginActivity
 

@@ -1,11 +1,8 @@
 package com.securicam.data.retrofit
 
-import com.securicam.data.responses.LoginResponse
-import com.securicam.data.responses.RegisterResponse
+import com.securicam.data.responses.*
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
@@ -24,4 +21,22 @@ interface ApiService {
         @Field("role") role: String,
     ): Call<RegisterResponse>
 
+    @GET("user/connections")
+    fun getAllCameraConnections(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+    ): Call<CameraConnectionResponse>
+
+    @GET("pair/inbox")
+    fun getPairingRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+    ): Call<PairingRequestResponse>
+
+    @POST("pair/accept")
+    fun acceptPairRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Query("id") pairId: String,
+    ): Call<AcceptPairRequestResponse>
 }
