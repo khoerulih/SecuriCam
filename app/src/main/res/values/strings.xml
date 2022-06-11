@@ -44,6 +44,20 @@
     <string name="set_connect">Request Connection</string>
     <string name="set_disconnect">Disconnect</string>
     <!--<string name=""></string>-->
+    <string name="observe_button">Observe Button</string>
+    <string name="switch_camera">Switch Camera</string>
+    <string name="user_avatar">avatar</string>
+    <string name="request">Request Pairing</string>
+    <string name="observing">Observing…</string>
+    <string name="empty_message">There\'s Nothing To Show</string>
+    <string name="start_observe">Start Observe</string>
+    <string name="list_connection">List Connection</string>
+    <string name="client">CLIENT</string>
+    <string name="remove_connection">Remove Connection</string>
+    <string name="login">Login</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="this_user_want_to_connect_with_your_device">This user want to connect with your device</string>
 
     <string-array name="roles">
         <item>CLIENT</item>

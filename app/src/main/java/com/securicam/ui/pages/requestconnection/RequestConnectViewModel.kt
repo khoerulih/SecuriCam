@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.securicam.data.responses.ClientDetail
+import com.securicam.data.responses.ClientDetail2
 import com.securicam.data.responses.SendPairResponse
 import com.securicam.data.retrofit.ApiConfig
 import com.securicam.ui.pages.login.LoginViewModel
@@ -14,8 +14,8 @@ import retrofit2.Response
 
 class RequestConnectViewModel : ViewModel() {
 
-    private val _sendResult = MutableLiveData<ClientDetail>()
-    val sendResult: LiveData<ClientDetail> = _sendResult
+    private val _sendResult = MutableLiveData<ClientDetail2>()
+    val sendResult: LiveData<ClientDetail2> = _sendResult
 
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = _isError
@@ -40,7 +40,6 @@ class RequestConnectViewModel : ViewModel() {
 
         })
     }
-
 
     companion object {
         private const val TAG = "RequestConnectVM"

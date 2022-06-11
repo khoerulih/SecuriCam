@@ -9,17 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
 import com.securicam.databinding.ActivityRegisterBinding
-import com.securicam.ui.pages.login.LoginActivity
 import com.securicam.utils.goToLoginActivity
 
 class RegisterActivity : AppCompatActivity() {

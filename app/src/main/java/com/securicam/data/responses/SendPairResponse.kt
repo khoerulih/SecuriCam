@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class SendPairResponse (
 
     @field:SerializedName("data")
-    val listRequestPair: ClientDetail,
+    val listRequestPair: ClientDetail2,
 
     @field:SerializedName("success")
     val success: Boolean,
@@ -17,7 +17,7 @@ data class SendPairResponse (
 )
 
 @Parcelize
-data class ClientDetail(
+data class ClientDetail2(
 
     @field:SerializedName("fcm")
     val fcm: String? = null,

@@ -41,6 +41,24 @@ interface ApiService {
         @Field("role") role: String,
     ): Call<RegisterResponse>
 
+    @GET("user/connections")
+    fun getAllCameraConnections(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+    ): Call<CameraConnectionResponse>
+
+    @GET("pair/inbox")
+    fun getPairingRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+    ): Call<PairingRequestResponse>
+
+    @POST("pair/accept")
+    fun acceptPairRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Query("id") pairId: String,
+    ): Call<AcceptPairRequestResponse>
     @FormUrlEncoded
     @POST("pair/send")
     fun sendPairRequest(

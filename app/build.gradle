@@ -6,6 +6,7 @@ plugins {
 
 android {
     compileSdk 32
+    ndkVersion "21.3.6528147"
 
     defaultConfig {
         applicationId "com.securicam"
@@ -29,9 +30,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
     buildFeatures {
         viewBinding true
+        mlModelBinding true
+    }
+    aaptOptions {
+        noCompress "tflite"
+        noCompress "lite"
     }
 }
 
@@ -60,6 +67,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
     implementation "androidx.fragment:fragment-ktx:1.4.1"
+
+    // Tensorflow lite
+    implementation 'org.tensorflow:tensorflow-lite:2.8.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.8.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
