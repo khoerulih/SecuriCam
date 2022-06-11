@@ -59,10 +59,12 @@ interface ApiService {
         @Header("x-access-token") accessToken: String,
         @Query("id") pairId: String,
     ): Call<AcceptPairRequestResponse>
-    @FormUrlEncoded
+
     @POST("pair/send")
     fun sendPairRequest(
-        @Field("receiver") receiver: String,
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Query("reciever") receiver: String,
     ): Call<SendPairResponse>
 
 }

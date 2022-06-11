@@ -20,8 +20,8 @@ class RequestConnectViewModel : ViewModel() {
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = _isError
 
-    fun sendPairRequest(receiver : String){
-        val client = ApiConfig.getApiService().sendPairRequest(receiver)
+    fun sendPairRequest(token: String, receiver : String){
+        val client = ApiConfig.getApiService().sendPairRequest("Bearer $token", token, receiver)
         client.enqueue(object : Callback<SendPairResponse> {
             override fun onResponse(call: Call<SendPairResponse>, response: Response<SendPairResponse>) {
                 if (response.isSuccessful) {

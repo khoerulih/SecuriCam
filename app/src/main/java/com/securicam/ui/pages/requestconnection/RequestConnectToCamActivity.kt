@@ -76,11 +76,10 @@ class RequestConnectToCamActivity : AppCompatActivity() {
         binding?.btnRequest?.setOnClickListener{
             val receiver = binding?.tvId?.text.toString()
 
-            requestConnectViewModel.sendPairRequest(receiver)
+            requestConnectViewModel.sendPairRequest(accessToken, receiver)
             showLoading(true)
 
         }
-
 
         supportActionBar?.title = "Connected Request"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
