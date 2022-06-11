@@ -28,21 +28,21 @@ data class ListConnection(
 @Parcelize
 data class ConnectionDetail(
 
-	@field:SerializedName("fcm")
-	val fcm: String? = null,
+    /*@field:SerializedName("fcm")
+    val fcm: Any,
+*/
+    @field:SerializedName("role")
+    val role: String,
 
-	@field:SerializedName("role")
-	val role: String,
+    @field:SerializedName("lastLoggedIn")
+    val lastLoggedIn: Long,
 
-	@field:SerializedName("lastLoggedIn")
-	val lastLoggedIn: Long,
+    @field:SerializedName("id")
+    val id: String,
 
-	@field:SerializedName("id")
-	val id: String,
+    @field:SerializedName("email")
+    val email: String,
 
-	@field:SerializedName("email")
-	val email: String,
-
-	@field:SerializedName("username")
-	val username: String
-): Parcelable
+    @field:SerializedName("username")
+    val username: String
+) : Parcelable

@@ -21,6 +21,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
 import com.securicam.databinding.ActivityLoginBinding
 import com.securicam.ui.ViewModelFactory
+import com.securicam.ui.pages.clientdetail.ClientDetailActivity
+import com.securicam.ui.pages.requestconnection.RequestConnectToCamActivity
 import com.securicam.utils.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")

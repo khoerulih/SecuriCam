@@ -1,6 +1,9 @@
 package com.securicam.data.responses
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
 
 data class LoginResponse(
 
@@ -14,11 +17,12 @@ data class LoginResponse(
 	val message: String
 )
 
+@Parcelize
 data class LoginData(
 
-	@field:SerializedName("fcm")
+	/*@field:SerializedName("fMcm")
 	val fcm: Any,
-
+*/
 	@field:SerializedName("id")
 	val id: String,
 
@@ -34,10 +38,10 @@ data class LoginData(
 	@field:SerializedName("role")
 	val role: String,
 
-	@field:SerializedName("connection")
-	val connection: List<Any?>? = null,
+/*	@field:SerializedName("connection")
+	val connection: List<Any?>? = null,*/
 
 	@field:SerializedName("accessToken")
 	val accessToken: String
 
-)
+) : Parcelable
