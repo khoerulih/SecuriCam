@@ -3,17 +3,15 @@ package com.securicam.ui.pages.detailrequestpair
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.securicam.R
 import com.securicam.data.responses.ListRequestPair
-import com.securicam.data.responses.PairingRequestResponse
 import com.securicam.databinding.ActivityDetailRequestPairBinding
 import com.securicam.ui.ViewModelFactory
-import com.securicam.ui.pages.requestpair.RequestPairViewModel
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToCameraMainActivity
@@ -63,9 +61,11 @@ class DetailRequestPairActivity : AppCompatActivity() {
                     it.id
                 )
             }
+            showLoading(true)
         }
 
         detailRequestPairViewModel.acceptPairRequest.observe(this) { result ->
+            showLoading(false)
             if (result.success) {
                 goToCameraMainActivity(this)
             }
@@ -74,6 +74,14 @@ class DetailRequestPairActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Detail Request Pair"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.progressBar?.visibility = View.VISIBLE
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
     }
 
     companion object {

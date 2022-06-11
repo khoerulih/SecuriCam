@@ -21,19 +21,29 @@
     <string name="email_invalid">Please enter a valid email.</string>
     <string name="email_empty">Email cannot be empty!!</string>
     <string name="username_empty">Username cannot be empty!!</string>
-    <string name="login_success">Login Berhasil</string>
-    <string name="login_failed">Login Gagal</string>
+    <string name="login_success">Login Success</string>
+    <string name="login_failed">Login Failed</string>
     <string name="role">Set Device As</string>
-    <string name="register_failed">Register Gagal</string>
-    <string name="register_success">Register Berhasil, SIlahkan Login</string>
-    <string name="logout_confirmation">Apakah Anda Yakin?</string>
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
-    <string name="logout_success">Logout Berhasil</string>
+    <string name="register_failed">Register Failed</string>
+    <string name="register_success">Register Success, Please Login</string>
+    <string name="logout_confirmation">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="logout_success">Logout Success</string>
     <string name="observe_button">Observe Button</string>
     <string name="switch_camera">Switch Camera</string>
     <string name="user_avatar">avatar</string>
     <string name="request">Request Pairing</string>
+    <string name="observing">Observing…</string>
+    <string name="empty_message">There\'s Nothing To Show</string>
+    <string name="start_observe">Start Observe</string>
+    <string name="list_connection">List Connection</string>
+    <string name="client">CLIENT</string>
+    <string name="remove_connection">Remove Connection</string>
+    <string name="login">Login</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="this_user_want_to_connect_with_your_device">This user want to connect with your device</string>
 
     <string-array name="roles">
         <item>CLIENT</item>

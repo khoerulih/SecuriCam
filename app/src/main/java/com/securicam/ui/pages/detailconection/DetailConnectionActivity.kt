@@ -7,12 +7,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.securicam.R
 import com.securicam.data.responses.ListConnection
-import com.securicam.data.responses.ListRequestPair
 import com.securicam.databinding.ActivityDetailConnectionBinding
 import com.securicam.ui.ViewModelFactory
-import com.securicam.ui.pages.detailrequestpair.DetailRequestPairActivity
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToLoginActivity
@@ -45,7 +42,7 @@ class DetailConnectionActivity : AppCompatActivity() {
             }
         }
 
-        val dataConnection = intent.getParcelableExtra<ListConnection>(DetailConnectionActivity.EXTRA_DATA_CONNECTION)
+        val dataConnection = intent.getParcelableExtra<ListConnection>(EXTRA_DATA_CONNECTION)
 
         binding?.tvDetailUsername?.text = dataConnection?.connectionDetail?.username
         binding?.tvDetailEmail?.text = dataConnection?.connectionDetail?.email

@@ -72,6 +72,10 @@ class CameraMainActivity : AppCompatActivity() {
             showLoading(it)
         }
 
+        cameraViewModel.isEmpty.observe(this) {
+            showDataEmptyMessage(it)
+        }
+
         binding?.fabStartObserve?.setOnClickListener {
             val intent = Intent(this, ObserveActivity::class.java)
             startActivity(intent)
@@ -137,6 +141,14 @@ class CameraMainActivity : AppCompatActivity() {
             binding?.progressBar?.visibility = View.VISIBLE
         } else {
             binding?.progressBar?.visibility = View.GONE
+        }
+    }
+
+    private fun showDataEmptyMessage(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding?.tvEmpty?.visibility = View.VISIBLE
+        } else {
+            binding?.tvEmpty?.visibility = View.GONE
         }
     }
 

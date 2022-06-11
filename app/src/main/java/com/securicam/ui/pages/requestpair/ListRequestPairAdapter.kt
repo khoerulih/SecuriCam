@@ -1,11 +1,8 @@
 package com.securicam.ui.pages.requestpair
 
-import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.securicam.data.responses.ListRequestPair
 import com.securicam.databinding.ItemRowRequestPairBinding

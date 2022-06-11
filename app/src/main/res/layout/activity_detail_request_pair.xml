@@ -16,7 +16,8 @@
         android:src="@drawable/ic_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/profile" />
 
     <TextView
         android:id="@+id/tv_detail_username"
@@ -51,7 +52,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_marginTop="8dp"
-        android:text="This user want to connect with your device"
+        android:text="@string/this_user_want_to_connect_with_your_device"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -64,7 +65,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Reject"
+        android:text="@string/reject"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_description"
         app:layout_constraintStart_toStartOf="@id/tv_detail_description"
         app:layout_constraintEnd_toStartOf="@id/btn_accept"/>
@@ -77,9 +78,24 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
         android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Accept"
+        android:text="@string/accept"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_description"
         app:layout_constraintEnd_toEndOf="@id/tv_detail_description"
         app:layout_constraintStart_toEndOf="@id/btn_reject"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

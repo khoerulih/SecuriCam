@@ -1,7 +1,6 @@
 package com.securicam.utils
 
 import android.content.Context
-import androidx.core.content.ContextCompat.startActivity
 import com.securicam.ui.pages.cameramain.CameraMainActivity
 import com.securicam.ui.pages.clientmain.ClientMainActivity
 import com.securicam.ui.pages.login.LoginActivity

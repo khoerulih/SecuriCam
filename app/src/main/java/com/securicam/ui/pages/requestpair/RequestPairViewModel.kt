@@ -14,11 +14,11 @@ class RequestPairViewModel: ViewModel() {
     private val _listRequestPair = MutableLiveData<List<ListRequestPair>>()
     val listRequestPair: LiveData<List<ListRequestPair>> = _listRequestPair
 
-    private val _acceptPairRequest = MutableLiveData<AcceptPairRequestResponse>()
-    val acceptPairRequest: LiveData<AcceptPairRequestResponse> = _acceptPairRequest
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _isEmpty = MutableLiveData<Boolean>()
+    val isEmpty: LiveData<Boolean> = _isEmpty
 
     fun getListRequestPair(token: String) {
         _isLoading.value = true
@@ -28,6 +28,7 @@ class RequestPairViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     _isLoading.value = false
                     _listRequestPair.value = response.body()?.listRequestPair as List<ListRequestPair>
+                    _isEmpty.value = _listRequestPair.value.isNullOrEmpty()
                 } else {
                     _isLoading.value = false
                     Log.e(TAG, "onFailure : ${response.message()}")
@@ -35,27 +36,6 @@ class RequestPairViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<PairingRequestResponse>, t: Throwable) {
-                _isLoading.value = false
-                Log.e(TAG, "onFailure : ${t.message}")
-            }
-        })
-    }
-
-    fun acceptPairRequest(token: String, id: String) {
-        _isLoading.value = true
-        val client = ApiConfig.getApiService().acceptPairRequest("Bearer $token", token, id)
-        client.enqueue(object : Callback<AcceptPairRequestResponse> {
-            override fun onResponse(call: Call<AcceptPairRequestResponse>, response: Response<AcceptPairRequestResponse>) {
-                if (response.isSuccessful) {
-                    _isLoading.value = false
-                    _acceptPairRequest.value = response.body()
-                } else {
-                    _isLoading.value = false
-                    Log.e(TAG, "onFailure : ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<AcceptPairRequestResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure : ${t.message}")
             }

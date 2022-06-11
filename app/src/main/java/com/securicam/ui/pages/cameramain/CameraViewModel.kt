@@ -18,6 +18,9 @@ class CameraViewModel: ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isEmpty = MutableLiveData<Boolean>()
+    val isEmpty: LiveData<Boolean> = _isEmpty
+
     fun getAllCameraConnection(token: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getAllCameraConnections("Bearer $token", token)
@@ -26,6 +29,7 @@ class CameraViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     _isLoading.value = false
                     _listConnection.value = response.body()?.listConnection as List<ListConnection>
+                    _isEmpty.value = _listConnection.value.isNullOrEmpty()
                 } else {
                     _isLoading.value = false
                     Log.e(TAG, "onFailure : ${response.message()}")

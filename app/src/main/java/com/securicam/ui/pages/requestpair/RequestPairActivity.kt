@@ -11,12 +11,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.securicam.data.responses.ListConnection
 import com.securicam.data.responses.ListRequestPair
 import com.securicam.databinding.ActivityRequestPairBinding
 import com.securicam.ui.ViewModelFactory
-import com.securicam.ui.pages.cameramain.CameraViewModel
-import com.securicam.ui.pages.cameramain.ListConnectionAdapter
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToLoginActivity
@@ -67,6 +64,11 @@ class RequestPairActivity : AppCompatActivity() {
             showLoading(it)
         }
 
+        requestPairViewModel.isEmpty.observe(this) {
+            showDataEmptyMessage(it)
+        }
+
+
         supportActionBar?.title = "List Request Pairing"
     }
 
@@ -85,7 +87,6 @@ class RequestPairActivity : AppCompatActivity() {
                 )
                 requestPair.add(list)
             }
-
         }
         val adapter = ListRequestPairAdapter(requestPair)
         binding?.rvRequestPair?.adapter = adapter
@@ -96,6 +97,14 @@ class RequestPairActivity : AppCompatActivity() {
             binding?.progressBar?.visibility = View.VISIBLE
         } else {
             binding?.progressBar?.visibility = View.GONE
+        }
+    }
+
+    private fun showDataEmptyMessage(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding?.tvEmpty?.visibility = View.VISIBLE
+        } else {
+            binding?.tvEmpty?.visibility = View.GONE
         }
     }
 

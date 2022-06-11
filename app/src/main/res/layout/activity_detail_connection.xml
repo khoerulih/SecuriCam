@@ -16,7 +16,8 @@
         android:transitionName="detail_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/profile" />
 
     <TextView
         android:id="@+id/tv_detail_username"
@@ -52,9 +53,24 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/holo_red_dark"
         android:drawableLeft="@drawable/ic_close_24"
-        android:text="Remove Connection"
+        android:text="@string/remove_connection"
         app:layout_constraintEnd_toEndOf="@id/tv_detail_email"
         app:layout_constraintStart_toStartOf="@id/tv_detail_email"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_email" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

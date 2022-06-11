@@ -7,7 +7,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Rational
 import android.util.Size
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -15,7 +14,6 @@ import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.os.HandlerCompat.postDelayed
 import com.securicam.R
 import com.securicam.databinding.ActivityObserveBinding
 import com.securicam.utils.createFile
@@ -35,13 +33,12 @@ class ObserveActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var outputDirectory: File
 
-    private val CAMERA_X_RESULT = 200
     private val requiredPermissions = arrayOf(Manifest.permission.CAMERA)
     private val requestCodePermissions = 10
 
-    var handler: Handler = Handler()
-    var runnable: Runnable? = null
-    var delay = 5000
+    private var handler: Handler = Handler()
+    private var runnable: Runnable? = null
+    private var delay = 5000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +57,6 @@ class ObserveActivity : AppCompatActivity() {
             filenameFormat,
             Locale.US
         ).format(System.currentTimeMillis())
-
-        binding?.cameraCaptureButton?.setOnClickListener {
-            takePhoto(timeStamp)
-        }
 
         handler.postDelayed(Runnable {
             handler.postDelayed(runnable!!, delay.toLong())
@@ -197,7 +190,6 @@ class ObserveActivity : AppCompatActivity() {
     private fun allPermissionsGranted() = requiredPermissions.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-
 
     companion object {
         private val TAG = "ObserveActivity"
