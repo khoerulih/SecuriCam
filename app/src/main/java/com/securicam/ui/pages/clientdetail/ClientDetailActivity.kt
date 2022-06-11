@@ -1,13 +1,17 @@
 package com.securicam.ui.pages.clientdetail
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
+import com.securicam.data.responses.ListCamera
+import com.securicam.data.responses.LoginData
 import com.securicam.databinding.ActivityClientDetailBinding
 import com.securicam.ui.ViewModelFactory
 import com.securicam.utils.UserPreference
@@ -20,6 +24,7 @@ class ClientDetailActivity : AppCompatActivity() {
     private var _binding: ActivityClientDetailBinding? = null
     private val binding get() = _binding
     private lateinit var accessToken: String
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +45,19 @@ class ClientDetailActivity : AppCompatActivity() {
                 accessToken = token
             }
         }
+
+
     }
 
-    fun coba(email :  String, username : String){
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.progressBar?.visibility = View.VISIBLE
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
+    }
 
+    companion object {
+        const val EXTRA_DATA_USER = "extra_data_user"
     }
 }

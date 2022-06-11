@@ -48,7 +48,7 @@
         tools:text="@string/email" />
 
     <TextView
-        android:id="@+id/tv_role"
+        android:id="@+id/tv_user_id"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -60,6 +60,21 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/tv_email_user"
         app:layout_constraintTop_toBottomOf="@id/tv_email_user"
-        tools:text="@string/role" />
+        tools:text="@string/id_user" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

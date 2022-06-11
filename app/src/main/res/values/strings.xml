@@ -11,6 +11,7 @@
     <string name="password_minimum">Password must be 6 characters or more.</string>
     <string name="password_empty">Password cannot be empty!!</string>
     <string name="name">Username</string>
+    <string name="id_user">Id</string>
     <string name="have_acc">Have an account? Log in</string>
     <string name="min_name">Name must be 2 characters or more</string>
     <string name="detected">Detected</string>
