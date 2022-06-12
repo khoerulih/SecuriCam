@@ -6,20 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.pages.clientdetail.ClientDetailActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/img_detected"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_person_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.259" />
+        app:layout_constraintVertical_bias="0.178"
+        android:src="@drawable/ic_user"
+        android:contentDescription="@string/profile" />
 
     <TextView
-        android:id="@+id/tv_user"
+        android:id="@+id/tv_cam_username"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
@@ -33,34 +34,30 @@
         tools:text="@string/device"/>
 
     <TextView
-        android:id="@+id/tv_email_user"
+        android:id="@+id/tv_cam_email"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-thin"
+        android:layout_marginTop="8dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/tv_user"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/tv_user"
-        app:layout_constraintTop_toBottomOf="@id/tv_user"
-        tools:text="@string/email" />
+        app:layout_constraintEnd_toEndOf="@id/tv_cam_username"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tv_cam_username"
+        app:layout_constraintTop_toBottomOf="@id/tv_cam_username"
+        tools:text="@string/device"/>
 
-    <TextView
-        android:id="@+id/tv_user_id"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="sans-serif-thin"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/tv_email_user"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/tv_email_user"
-        app:layout_constraintTop_toBottomOf="@id/tv_email_user"
-        tools:text="@string/id_user" />
+    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/set_disconnect"
+        android:backgroundTint="@android:color/holo_red_dark"
+        app:layout_constraintEnd_toEndOf="@id/tv_cam_email"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="@id/tv_cam_email"
+        app:layout_constraintTop_toBottomOf="@id/tv_cam_email" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

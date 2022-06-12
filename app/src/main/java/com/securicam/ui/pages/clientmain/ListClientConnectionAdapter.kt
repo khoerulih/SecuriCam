@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.securicam.data.responses.ListConnection
 import com.securicam.databinding.ItemRowConnectionBinding
 import com.securicam.databinding.ItemRowDevicesBinding
+import com.securicam.ui.pages.clientdetail.ClientDetailActivity
 import com.securicam.ui.pages.detailconection.DetailConnectionActivity
 
 class ListClientConnectionAdapter(private val listConnection: List<ListConnection>) :
@@ -31,14 +32,14 @@ class ListClientConnectionAdapter(private val listConnection: List<ListConnectio
         fun bind(dataConnection: ListConnection) {
             binding.tvCamDevice.text = dataConnection.connectionDetail.username
             itemView.setOnClickListener {
-//                val goToDetailConnectionActivity =
-//                    Intent(itemView.context, DetailConnectionActivity::class.java)
-//                goToDetailConnectionActivity.putExtra(
-//                    DetailConnectionActivity.EXTRA_DATA_CONNECTION,
-//                    dataConnection
-//                )
-//
-//                itemView.context.startActivity(goToDetailConnectionActivity)
+                val goToClientDetailActivity =
+                    Intent(itemView.context, ClientDetailActivity::class.java)
+                goToClientDetailActivity.putExtra(
+                    ClientDetailActivity.EXTRA_DATA_USER,
+                    dataConnection
+                )
+
+                itemView.context.startActivity(goToClientDetailActivity)
             }
         }
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.pages.disconnected.DisconnectedActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/img_detected"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -16,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.178"
-        android:src="@drawable/ic_person_24"/>
+        android:src="@drawable/ic_user"
+        android:contentDescription="@string/profile" />
 
     <TextView
         android:id="@+id/tv_cam_device"
@@ -32,31 +33,16 @@
         app:layout_constraintTop_toBottomOf="@id/img_detected"
         tools:text="@string/device"/>
 
-    <TextView
-        android:id="@+id/tv_status_connect"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-thin"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/tv_cam_device"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/tv_cam_device"
-        app:layout_constraintTop_toBottomOf="@id/tv_cam_device"
-        tools:text="@string/status" />
-
     <Button
-        android:id="@+id/btn_request"
+        android:id="@+id/btn_disconnect"
         android:layout_width="220dp"
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:text="@string/set_disconnect"
-        app:layout_constraintEnd_toEndOf="@id/tv_status_connect"
+        app:layout_constraintEnd_toEndOf="@id/tv_cam_device"
         app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="@id/tv_status_connect"
-        app:layout_constraintTop_toBottomOf="@id/tv_status_connect" />
+        app:layout_constraintStart_toStartOf="@id/tv_cam_device"
+        app:layout_constraintTop_toBottomOf="@id/tv_cam_device" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -72,4 +58,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

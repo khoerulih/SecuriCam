@@ -1,8 +1,8 @@
 package com.securicam.ui.pages.observe
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,15 +14,27 @@ import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
 import com.securicam.databinding.ActivityObserveBinding
+import com.securicam.ui.ViewModelFactory
+import com.securicam.utils.UserPreference
+import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.createFile
+import com.securicam.utils.goToLoginActivity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class ObserveActivity : AppCompatActivity() {
 
     private var _binding: ActivityObserveBinding? = null
@@ -38,7 +50,9 @@ class ObserveActivity : AppCompatActivity() {
 
     private var handler: Handler = Handler()
     private var runnable: Runnable? = null
-    private var delay = 5000
+    private var delay = 25000
+
+    private lateinit var accessToken: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +71,21 @@ class ObserveActivity : AppCompatActivity() {
             filenameFormat,
             Locale.US
         ).format(System.currentTimeMillis())
+
+        val pref = UserPreference.getInstance(dataStore)
+        val userPreferenceViewModel =
+            ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance(application, pref)
+            )[UserPreferenceViewModel::class.java]
+
+        userPreferenceViewModel.getToken().observe(this){ token ->
+            if(token.isNullOrEmpty()){
+                goToLoginActivity(this)
+            } else {
+                accessToken = token
+            }
+        }
 
         handler.postDelayed(Runnable {
             handler.postDelayed(runnable!!, delay.toLong())
@@ -98,6 +127,12 @@ class ObserveActivity : AppCompatActivity() {
     }
 
     private fun takePhoto(timestamp: String) {
+
+        val observeViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[ObserveViewModel::class.java]
+
         val imageCapture = imageCapture ?: return
 
         val photoFile = createFile(application, timestamp)
@@ -116,21 +151,21 @@ class ObserveActivity : AppCompatActivity() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-//                    val intent = Intent()
-//                    intent.putExtra(CreateStoryActivity.EXTRA_PICTURE, photoFile)
-//                    intent.putExtra(
-//                        CreateStoryActivity.IS_BACK_CAMERA,
-//                        cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
-//                    )
-//                    setResult(CreateStoryActivity.CAMERA_X_RESULT, intent)
-//                    finish()
-                    val savedUri = Uri.fromFile(photoFile)
+                    val requestImageFile = photoFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                    val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                        "image",
+                        photoFile.name,
+                        requestImageFile
+                    )
+                    observeViewModel.sendImageForPredict(accessToken, imageMultipart)
 
-                    Toast.makeText(
-                        this@ObserveActivity,
-                        "Berhasil mendapatkan gambar, gambar disimpan di $savedUri",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    observeViewModel.sendImageResponses.observe(this@ObserveActivity){ response ->
+                        Toast.makeText(
+                            this@ObserveActivity,
+                            response.data,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         )
@@ -189,9 +224,5 @@ class ObserveActivity : AppCompatActivity() {
 
     private fun allPermissionsGranted() = requiredPermissions.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    companion object {
-        private val TAG = "ObserveActivity"
     }
 }

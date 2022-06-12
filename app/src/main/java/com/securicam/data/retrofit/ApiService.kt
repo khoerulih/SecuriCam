@@ -1,6 +1,7 @@
 package com.securicam.data.retrofit
 
 import com.securicam.data.responses.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -82,4 +83,12 @@ interface ApiService {
         @Header("x-access-token") accessToken: String,
         @Query("reciever") receiver: String,
     ): Call<SendPairResponse>
+
+    @Multipart
+    @POST("ai/predict")
+    fun sendImageForPredictRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Part image: MultipartBody.Part,
+    ): Call<PredictResponse>
 }

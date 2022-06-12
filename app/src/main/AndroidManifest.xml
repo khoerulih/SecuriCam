@@ -29,15 +29,13 @@
             android:parentActivityName=".ui.pages.clientmain.ClientMainActivity"/>
         <activity
             android:name=".ui.pages.clientdetail.ClientDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.pages.clientmain.ClientMainActivity"/>
         <activity
             android:name=".ui.pages.disconnected.DisconnectedActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.requestconnection.RequestConnectToCamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.pages.clientmain.ListDeviceActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.detailnotification.DetailClientNotification"
