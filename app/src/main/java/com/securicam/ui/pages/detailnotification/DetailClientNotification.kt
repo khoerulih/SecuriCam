@@ -16,4 +16,8 @@ class DetailClientNotification : AppCompatActivity() {
         super.onBackPressed()
         return
     }
+
+    companion object {
+        const val EXTRA_DATA_NOTIFICATION = "extra_data_notification"
+    }
 }
