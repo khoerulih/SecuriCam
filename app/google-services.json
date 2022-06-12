@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "63638338293",
+    "project_id": "securicam-ef8ef",
+    "storage_bucket": "securicam-ef8ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63638338293:android:4f8dcd8b43bfd58430a3bc",
+        "android_client_info": {
+          "package_name": "com.securicam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63638338293-aokj9dv0uabe2sg1toqkqmc4ftk4g3si.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACURMzgueA6USBuXdV1AZc4VgkjUTzcsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63638338293-aokj9dv0uabe2sg1toqkqmc4ftk4g3si.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
