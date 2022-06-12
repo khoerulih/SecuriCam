@@ -33,28 +33,13 @@
 
         <TextView
             android:id="@+id/tv_detected"
-            android:layout_width="98dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="16dp"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.139"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             card_view:layout_constraintStart_toEndOf="@+id/img_detected"
-            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/img_detected"
+            card_view:layout_constraintBottom_toBottomOf="@+id/img_detected"
             tools:text="@string/detected" />
-
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="250dp"
-            android:layout_height="29dp"
-            android:layout_marginTop="10dp"
-            android:textSize="12sp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="@+id/tv_detected"
-            card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintStart_toStartOf="@+id/tv_detected"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_detected"
-            card_view:layout_constraintVertical_bias="0.0"
-            tools:text="@string/alert" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

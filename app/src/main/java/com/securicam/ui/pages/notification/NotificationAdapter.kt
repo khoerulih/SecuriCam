@@ -1,13 +1,11 @@
 package com.securicam.ui.pages.notification
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.securicam.data.responses.ListNotification
 import com.securicam.databinding.ItemRowNotificationBinding
-import com.securicam.ui.pages.detailnotification.DetailClientNotification
 
 class NotificationAdapter(private val listNotification: List<ListNotification>) :
     RecyclerView.Adapter<NotificationAdapter.ListViewHolder>() {
@@ -31,7 +29,6 @@ class NotificationAdapter(private val listNotification: List<ListNotification>) 
         fun bind(dataNotification: ListNotification) {
             Glide.with(itemView.context).load(dataNotification.imagePath).into(binding.imgDetected)
             binding.tvDetected.text = dataNotification.data
-            binding.tvDesc.text = dataNotification.description
             itemView.setOnClickListener {
 /*                val goToDetailNotificationActivity =
                     Intent(itemView.context, DetailClientNotification::class.java)

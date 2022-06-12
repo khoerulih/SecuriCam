@@ -41,7 +41,7 @@ class ObserveViewModel: ViewModel() {
     }
 
     companion object {
-        private const val TAG = "CreateStoryViewModel"
+        private const val TAG = "ObserveViewModel"
     }
 
 }

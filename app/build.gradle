@@ -37,10 +37,6 @@ android {
         viewBinding true
         mlModelBinding true
     }
-    aaptOptions {
-        noCompress "tflite"
-        noCompress "lite"
-    }
 }
 
 dependencies {
@@ -50,7 +46,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
 
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
