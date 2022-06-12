@@ -27,8 +27,8 @@ class NotificationAdapter(private val listNotification: List<ListNotification>) 
     class ListViewHolder(private val binding: ItemRowNotificationBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(dataNotification: ListNotification) {
-            Glide.with(itemView.context).load(dataNotification.imagePath).into(binding.imgDetected)
-            binding.tvDetected.text = dataNotification.data
+//            Glide.with(itemView.context).load(dataNotification.imagePath).into(binding.imgDetected)
+            binding.tvMessage.text = dataNotification.message
             itemView.setOnClickListener {
 /*                val goToDetailNotificationActivity =
                     Intent(itemView.context, DetailClientNotification::class.java)

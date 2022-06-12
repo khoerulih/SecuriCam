@@ -75,7 +75,6 @@ class RequestConnectToCamActivity : AppCompatActivity() {
         binding?.btnRequest?.setOnClickListener{
             dataCamera?.let { data ->
                 val receiver = data.id
-                Log.d("DAtaid", data.id)
                 requestConnectViewModel.sendPairRequest(accessToken, receiver)
             }
             showLoading(true)

@@ -76,12 +76,12 @@ class NotificationActivity : AppCompatActivity() {
         for (notification in listNotification) {
             val list = ListNotification(
                 notification.id,
-                notification.imagePath,
-                notification.description,
+                notification.message,
+                notification.from,
                 notification.data,
-                notification.email,
-                notification.username
-
+                notification.to,
+                notification.imagePath,
+                notification.time
             )
             notifications.add(list)
         }

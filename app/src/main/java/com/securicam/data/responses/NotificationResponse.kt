@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 data class NotificationResponse(
     @field:SerializedName("data")
-    val listNotification: ListNotification,
+    val listNotification: List<ListNotification>,
 
     @field:SerializedName("success")
     val success: Boolean,
@@ -14,24 +14,28 @@ data class NotificationResponse(
     @field:SerializedName("message")
     val message: String
 )
+
 @Parcelize
 data class ListNotification(
     @field:SerializedName("id")
     val id: String,
 
-    @field:SerializedName("imagePath")
-    val imagePath: String,
+    @field:SerializedName("message")
+    val message: String,
 
-    @field:SerializedName("description")
-    val description: String,
+    @field:SerializedName("from")
+    val from: String,
 
     @field:SerializedName("data")
-    val data: String,
+    val data: String? = null,
 
-    @field:SerializedName("email")
-    val email: String,
+    @field:SerializedName("to")
+    val to: String,
 
-    @field:SerializedName("username")
-    val username: String,
+    @field:SerializedName("imagePath")
+    val imagePath: String? = null,
+
+    @field:SerializedName("time")
+    val time: Long
 
 ) : Parcelable
