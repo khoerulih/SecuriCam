@@ -3,6 +3,7 @@ package com.securicam.ui.pages.detailrequestpair
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -54,17 +55,36 @@ class DetailRequestPairActivity : AppCompatActivity() {
 
         binding?.tvDetailUsername?.text = dataRequestPair?.clientDetail?.username
         binding?.tvDetailEmail?.text = dataRequestPair?.clientDetail?.email
+        Log.d("ID", "${dataRequestPair?.clientDetail?.id}")
         binding?.btnAccept?.setOnClickListener {
-            dataRequestPair?.let {
+            dataRequestPair?.let { response ->
                 detailRequestPairViewModel.acceptPairRequest(
                     accessToken,
-                    it.id
+                    response.id
+                )
+            }
+            showLoading(true)
+        }
+
+        binding?.btnReject?.setOnClickListener {
+            dataRequestPair?.let { response ->
+                detailRequestPairViewModel.rejectPairRequest(
+                    accessToken,
+                    response.id
                 )
             }
             showLoading(true)
         }
 
         detailRequestPairViewModel.acceptPairRequest.observe(this) { result ->
+            showLoading(false)
+            if (result.success) {
+                goToCameraMainActivity(this)
+            }
+            Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+        }
+
+        detailRequestPairViewModel.rejectPairRequest.observe(this) { result ->
             showLoading(false)
             if (result.success) {
                 goToCameraMainActivity(this)

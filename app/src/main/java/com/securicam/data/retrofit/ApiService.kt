@@ -47,6 +47,15 @@ interface ApiService {
         @Header("x-access-token") accessToken: String,
     ): Call<CameraConnectionResponse>
 
+    @FormUrlEncoded
+    @POST("user/connection/delete")
+    fun deleteConnection(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Field("connectionId") connectionId: String,
+    ): Call<DeleteConnectionResponse>
+
+
     @GET("pair/inbox")
     fun getPairingRequest(
         @Header("Authorization") token: String,
@@ -60,11 +69,17 @@ interface ApiService {
         @Query("id") pairId: String,
     ): Call<AcceptPairRequestResponse>
 
+    @POST("pair/reject")
+    fun rejectPairRequest(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+        @Query("id") pairId: String,
+    ): Call<RejectPairRequestResponse>
+
     @POST("pair/send")
     fun sendPairRequest(
         @Header("Authorization") token: String,
         @Header("x-access-token") accessToken: String,
         @Query("reciever") receiver: String,
     ): Call<SendPairResponse>
-
 }

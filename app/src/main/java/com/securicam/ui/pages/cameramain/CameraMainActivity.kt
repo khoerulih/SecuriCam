@@ -84,7 +84,7 @@ class CameraMainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.option_menu, menu)
+        inflater.inflate(R.menu.cam_option_menu, menu)
         return true
     }
 

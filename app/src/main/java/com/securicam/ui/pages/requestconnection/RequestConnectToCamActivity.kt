@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -17,6 +18,7 @@ import com.securicam.databinding.ActivityRequestConnectToCamBinding
 import com.securicam.ui.ViewModelFactory
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
+import com.securicam.utils.goToClientMainActivity
 import com.securicam.utils.goToLoginActivity
 
 
@@ -50,42 +52,45 @@ class RequestConnectToCamActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         )[RequestConnectViewModel::class.java]
 
-        requestConnectViewModel.isError.observe(this) { error ->
-            showLoading(false)
-            if (error) {
-                Toast.makeText(this, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, getString(R.string.request_success), Toast.LENGTH_SHORT)
-                    .show()
-
-                goToLoginActivity(this)
-                finish()
-            }
-        }
+//        requestConnectViewModel.isError.observe(this) { error ->
+//            showLoading(false)
+//            if (error) {
+//                Toast.makeText(this, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(this, getString(R.string.request_success), Toast.LENGTH_SHORT)
+//                    .show()
+//
+//                goToLoginActivity(this)
+//                finish()
+//            }
+//        }
 
 
         val dataCamera = intent.getParcelableExtra<ListCamera>(EXTRA_DATA_SEND_PAIR)
 
-        /* binding?.tvDetailUsername?.text = dataCamera?.connectionDetail?.username
-         binding?.tvDetailEmail?.text = dataCamera?.connectionDetail?.email
-         */
         binding?.tvCamDevice?.text = dataCamera?.username
         binding?.tvEmailCam?.text = dataCamera?.email
         binding?.tvId?.text = dataCamera?.id
 
         binding?.btnRequest?.setOnClickListener{
-            val receiver = binding?.tvId?.text.toString()
-
-            requestConnectViewModel.sendPairRequest(accessToken, receiver)
+            dataCamera?.let { data ->
+                val receiver = data.id
+                Log.d("DAtaid", data.id)
+                requestConnectViewModel.sendPairRequest(accessToken, receiver)
+            }
             showLoading(true)
+        }
 
+        requestConnectViewModel.sendPairResult.observe(this){ response ->
+            showLoading(false)
+            if(response.success){
+                goToClientMainActivity(this)
+            }
+            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
         }
 
         supportActionBar?.title = "Connected Request"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-
     }
 
 
@@ -98,7 +103,6 @@ class RequestConnectToCamActivity : AppCompatActivity() {
     }
 
     companion object {
-
         const val EXTRA_DATA_SEND_PAIR = "extra_data_send_pair"
 
         fun requestConnectToCamActivityIntent(context: Context): Intent {

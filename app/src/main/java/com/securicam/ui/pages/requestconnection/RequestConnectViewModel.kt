@@ -14,28 +14,28 @@ import retrofit2.Response
 
 class RequestConnectViewModel : ViewModel() {
 
-    private val _sendResult = MutableLiveData<ClientDetail2>()
-    val sendResult: LiveData<ClientDetail2> = _sendResult
+    private val _sendPairResult = MutableLiveData<SendPairResponse>()
+    val sendPairResult: LiveData<SendPairResponse> = _sendPairResult
 
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = _isError
 
-    fun sendPairRequest(token: String, receiver : String){
+    fun sendPairRequest(token: String, receiver: String){
         val client = ApiConfig.getApiService().sendPairRequest("Bearer $token", token, receiver)
         client.enqueue(object : Callback<SendPairResponse> {
             override fun onResponse(call: Call<SendPairResponse>, response: Response<SendPairResponse>) {
                 if (response.isSuccessful) {
-                    _sendResult.value = response.body()?.listRequestPair
+                    _sendPairResult.value = response.body()
                     _isError.value = false
                 } else {
                     _isError.value = true
-                    Log.e(RequestConnectViewModel.TAG, "RequestFailure : ${response.message()}")
+                    Log.e(TAG, "RequestFailure : ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<SendPairResponse>, t: Throwable) {
                 _isError.value = true
-                Log.e(RequestConnectViewModel.TAG, "onFailure : ${t.message}")
+                Log.e(TAG, "onFailure : ${t.message}")
             }
 
         })

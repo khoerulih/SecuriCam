@@ -19,6 +19,7 @@ import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToLoginActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class RequestPairActivity : AppCompatActivity() {
 
     private var _binding: ActivityRequestPairBinding? = null
@@ -41,8 +42,8 @@ class RequestPairActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         )[RequestPairViewModel::class.java]
 
-        userPreferenceViewModel.getToken().observe(this){ token ->
-            if(token.isNullOrEmpty()){
+        userPreferenceViewModel.getToken().observe(this) { token ->
+            if (token.isNullOrEmpty()) {
                 goToLoginActivity(this)
             } else {
                 requestPairViewModel.getListRequestPair(token)
@@ -72,21 +73,19 @@ class RequestPairActivity : AppCompatActivity() {
         supportActionBar?.title = "List Request Pairing"
     }
 
-    private fun setListRequestPair(listRequestPair : List<ListRequestPair>) {
+    private fun setListRequestPair(listRequestPair: List<ListRequestPair>) {
         val requestPair = ArrayList<ListRequestPair>()
         for (listRequest in listRequestPair) {
-            if(!listRequest.accepted){
-                val list = ListRequestPair(
-                    listRequest.senderId,
-                    listRequest.accepted,
-                    listRequest.id,
-                    listRequest.time,
-                    listRequest.recieverId,
-                    listRequest.clientDetail,
-                    listRequest.camDetail
-                )
-                requestPair.add(list)
-            }
+            val list = ListRequestPair(
+                listRequest.senderId,
+                listRequest.status,
+                listRequest.id,
+                listRequest.time,
+                listRequest.recieverId,
+                listRequest.clientDetail,
+                listRequest.camDetail
+            )
+            requestPair.add(list)
         }
         val adapter = ListRequestPairAdapter(requestPair)
         binding?.rvRequestPair?.adapter = adapter

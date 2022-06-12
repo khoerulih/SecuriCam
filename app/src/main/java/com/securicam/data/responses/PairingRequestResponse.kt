@@ -66,8 +66,8 @@ data class ListRequestPair(
 	@field:SerializedName("senderId")
 	val senderId: String,
 
-	@field:SerializedName("accepted")
-	val accepted: Boolean,
+	@field:SerializedName("status")
+	val status: String,
 
 	@field:SerializedName("id")
 	val id: String,

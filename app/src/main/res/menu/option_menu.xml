@@ -12,14 +12,9 @@
         android:icon = "@drawable/ic_baseline_account_circle_24"
         app:showAsAction="always" />
 
-    <item android:id="@+id/request"
-        android:title="@string/request"
-        android:icon = "@drawable/ic_person_add_white_24"
-        app:showAsAction="always" />
     <item android:id="@+id/logout"
         android:title="@string/logout"
         android:icon = "@drawable/ic_logout_white_24"
         app:showAsAction="always" />
     </group>
-        app:showAsAction="ifRoom" />
 </menu>
