@@ -56,6 +56,12 @@ interface ApiService {
         @Field("connectionId") connectionId: String,
     ): Call<DeleteConnectionResponse>
 
+    @GET("notification/all")
+    fun getAllNotification(
+        @Header("Authorization") token: String,
+        @Header("x-access-token") accessToken: String,
+    ): Call<NotificationResponse>
+
 
     @GET("pair/inbox")
     fun getPairingRequest(

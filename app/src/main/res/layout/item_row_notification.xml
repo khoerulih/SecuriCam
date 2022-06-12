@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
+    android:id="@+id/rv_notification"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -29,7 +29,7 @@
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintVertical_bias="1.0"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/ic_user" />
 
         <TextView
             android:id="@+id/tv_detected"
@@ -43,7 +43,7 @@
             tools:text="@string/detected" />
 
         <TextView
-            android:id="@id/tv_notif"
+            android:id="@+id/tv_desc"
             android:layout_width="250dp"
             android:layout_height="29dp"
             android:layout_marginTop="10dp"
