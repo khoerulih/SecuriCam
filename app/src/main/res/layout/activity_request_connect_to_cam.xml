@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.178"
-        android:src="@drawable/ic_person_24"/>
+        android:src="@drawable/ic_user"/>
 
     <TextView
         android:id="@+id/tv_cam_device"
@@ -24,7 +24,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/img_detected"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,7 +39,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-thin"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/tv_cam_device"
         app:layout_constraintHorizontal_bias="1.0"
@@ -54,7 +54,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-thin"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/tv_email_cam"
         app:layout_constraintHorizontal_bias="1.0"
@@ -68,11 +68,11 @@
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:text="@string/set_connect"
+
         app:layout_constraintEnd_toEndOf="@id/tv_id"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="@id/tv_id"
-        app:layout_constraintTop_toBottomOf="@id/tv_id"
-        tools:text="@string/id_cam"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_id"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

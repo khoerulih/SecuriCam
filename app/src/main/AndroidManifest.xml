@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.securicam">
+    package="com.securicam" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -18,10 +18,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SecuriCam"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".SearchCamActivity"
-            android:exported="false" />
+            android:name=".ui.pages.notification.NotificationActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.pages.clientmain.ClientMainActivity" />
+        <activity
+            android:name=".ui.pages.searchcamera.SearchCamActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.pages.clientmain.ClientMainActivity"/>
         <activity
             android:name=".ui.pages.clientdetail.ClientDetailActivity"
             android:exported="false" />
@@ -35,7 +40,7 @@
             android:name=".ui.pages.clientmain.ListDeviceActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.pages.notification.DetailClientNotification"
+            android:name=".ui.pages.detailnotification.DetailClientNotification"
             android:exported="false" />
         <activity
             android:name=".ui.pages.detailconection.DetailConnectionActivity"
@@ -66,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.pages.splash.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

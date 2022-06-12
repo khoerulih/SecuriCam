@@ -13,18 +13,24 @@
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/font/kavoon.xml" value="0.18703703703703703" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_camera_main.xml" value="0.1" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_client_detail.xml" value="0.1" />
-        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_client_main.xml" value="0.1" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_client_main.xml" value="0.2" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_detail_client_notification.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_detail_connection.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_detail_request_pair.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_disconnected.xml" value="0.1" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_list_device.xml" value="0.1" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_notification.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_observe.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_register.xml" value="0.17074275362318841" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_request_connect_to_cam.xml" value="0.22" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_request_pair.xml" value="0.17074275362318841" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_search_cam.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/activity_splash_screen.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/item_row_connection.xml" value="0.17074275362318841" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/item_row_devices.xml" value="0.2025974025974026" />
+        <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/item_row_notication.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/item_row_request_pair.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/layout/list_role_dropdown.xml" value="0.17074275362318841" />
         <entry key="..\:/_KULIAH/Bangkit/Capstone/SecuriCam/app/src/main/res/menu/cam_option_menu.xml" value="0.203125" />

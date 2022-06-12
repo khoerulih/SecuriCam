@@ -1,34 +1,32 @@
-package com.securicam.ui.pages.clientdetail
+package com.securicam.ui.pages.notification
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.securicam.R
-import com.securicam.data.responses.ListCamera
-import com.securicam.data.responses.LoginData
-import com.securicam.databinding.ActivityClientDetailBinding
+import com.securicam.databinding.ActivityNotificationBinding
 import com.securicam.ui.ViewModelFactory
+import com.securicam.ui.pages.cameramain.CameraMainActivity
 import com.securicam.utils.UserPreference
 import com.securicam.utils.UserPreferenceViewModel
 import com.securicam.utils.goToLoginActivity
 
-
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-class ClientDetailActivity : AppCompatActivity() {
-    private var _binding: ActivityClientDetailBinding? = null
+class NotificationActivity : AppCompatActivity() {
+
+    private var _binding: ActivityNotificationBinding? = null
     private val binding get() = _binding
-    private lateinit var accessToken: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityClientDetailBinding.inflate(layoutInflater)
+        _binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
         val pref = UserPreference.getInstance(dataStore)
         val userPreferenceViewModel =
             ViewModelProvider(
@@ -37,25 +35,19 @@ class ClientDetailActivity : AppCompatActivity() {
             )[UserPreferenceViewModel::class.java]
 
         userPreferenceViewModel.getToken().observe(this) { token ->
-            if (token.isNullOrEmpty()) {
+            if(token.isNullOrEmpty()){
                 goToLoginActivity(this)
-            } else {
-                accessToken = token
+                finish()
             }
         }
 
-
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding?.progressBar?.visibility = View.VISIBLE
-        } else {
-            binding?.progressBar?.visibility = View.GONE
-        }
+        supportActionBar?.title = "Notification"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     companion object {
-        const val EXTRA_DATA_USER = "extra_data_user"
+        fun notificationActivityIntent(context: Context): Intent {
+            return Intent(context, NotificationActivity::class.java)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.securicam.ui.pages.clientmain
+package com.securicam.ui.pages.searchcamera
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.securicam.data.responses.ListCamera
 import com.securicam.databinding.ItemRowDevicesBinding
 import com.securicam.ui.pages.requestconnection.RequestConnectToCamActivity
 
-class CameraSearchAdapter(private val listCamera: List<ListCamera>): RecyclerView.Adapter<CameraSearchAdapter.ListViewHolder>() {
+class ListSearchCamAdapter(private val listCamera: List<ListCamera>): RecyclerView.Adapter<ListSearchCamAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -25,7 +25,6 @@ class CameraSearchAdapter(private val listCamera: List<ListCamera>): RecyclerVie
 
     class ListViewHolder(private val binding: ItemRowDevicesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(dataConnection: ListCamera) {
-            binding.imgDetected
             binding.tvCamDevice.text = dataConnection.username
             dataConnection.email
             dataConnection.id

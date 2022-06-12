@@ -1,4 +1,4 @@
-package com.securicam.ui.pages.notification
+package com.securicam.ui.pages.detailnotification
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +13,7 @@ class DetailClientNotification : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-            super.onBackPressed()
-            return
+        super.onBackPressed()
+        return
     }
 }

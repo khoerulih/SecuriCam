@@ -15,34 +15,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cadangan"
         android:padding="8dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/img_detected"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_marginTop="2dp"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.05"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintVertical_bias="1.0"
-            android:src="@drawable/ic_baseline_photo_camera_front_24" />
+            android:src="@drawable/ic_user"
+            android:contentDescription="@string/profile" />
 
         <TextView
             android:id="@id/tv_cam_device"
-            android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:textSize="25sp"
-            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.139"
             card_view:layout_constraintStart_toEndOf="@+id/img_detected"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="@string/device" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

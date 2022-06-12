@@ -6,24 +6,35 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.securicam.R
+import com.securicam.data.responses.ListCamera
+import com.securicam.data.responses.ListConnection
+import com.securicam.databinding.ActivityClientMainBinding
 import com.securicam.ui.ViewModelFactory
 import com.securicam.ui.pages.clientdetail.ClientDetailActivity
-import com.securicam.utils.UserPreference
-import com.securicam.utils.UserPreferenceViewModel
-import com.securicam.utils.goToLoginActivity
+import com.securicam.utils.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class ClientMainActivity : AppCompatActivity() {
+
+    private var _binding: ActivityClientMainBinding? = null
+    private val binding get() = _binding
+
+    private lateinit var accessToken: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_client_main)
+        _binding = ActivityClientMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
         val pref = UserPreference.getInstance(dataStore)
         val userPreferenceViewModel =
@@ -32,12 +43,37 @@ class ClientMainActivity : AppCompatActivity() {
                 ViewModelFactory.getInstance(application, pref)
             )[UserPreferenceViewModel::class.java]
 
+        val clientMainViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[ClientMainViewModel::class.java]
+
         userPreferenceViewModel.getToken().observe(this) { token ->
-            if(token.isNullOrEmpty()){
+            if (token.isNullOrEmpty()) {
                 goToLoginActivity(this)
                 finish()
+            } else {
+                clientMainViewModel.getAllCameraConnection(token)
+                accessToken = token
             }
         }
+
+        clientMainViewModel.listConnection.observe(this) { data ->
+            setListCamera(data)
+        }
+
+        clientMainViewModel.isLoading.observe(this){
+            showLoading(it)
+        }
+
+        clientMainViewModel.isEmpty.observe(this){
+            showDataEmptyMessage(it)
+        }
+
+        binding?.rvConnection?.setHasFixedSize(true)
+        val layoutManager = LinearLayoutManager(this)
+        binding?.rvConnection?.layoutManager = layoutManager
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -46,19 +82,15 @@ class ClientMainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem):Boolean {
-        when(item.itemId) {
-            R.id.ic_device -> {
-                val device = Intent(this, ListDeviceActivity::class.java)
-                startActivity(device)
-                finish()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.search_device -> {
+                goToSearchCamActivity(this)
                 return true
             }
 
-            R.id.account -> {
-                val account = Intent(this, ClientDetailActivity::class.java)
-                startActivity(account)
-                finish()
+            R.id.notification -> {
+                goToNotificationActivity(this)
                 return true
             }
 
@@ -88,7 +120,36 @@ class ClientMainActivity : AppCompatActivity() {
             }
             else -> return true
         }
+    }
+
+    private fun setListCamera(listConnection: List<ListConnection>) {
+        val connections = ArrayList<ListConnection>()
+        for (connection in listConnection) {
+            val list = ListConnection(
+                connection.time,
+                connection.connectionDetail
+            )
+            connections.add(list)
         }
+        val adapter = ListClientConnectionAdapter(connections)
+        binding?.rvConnection?.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.progressBar?.visibility = View.VISIBLE
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
+    }
+
+    private fun showDataEmptyMessage(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding?.tvEmpty?.visibility = View.VISIBLE
+        } else {
+            binding?.tvEmpty?.visibility = View.GONE
+        }
+    }
 
     companion object {
         fun clientMainActivityIntent(context: Context): Intent {

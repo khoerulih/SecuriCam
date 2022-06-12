@@ -5,9 +5,11 @@ import com.securicam.ui.pages.cameramain.CameraMainActivity
 import com.securicam.ui.pages.clientmain.ClientMainActivity
 import com.securicam.ui.pages.disconnected.DisconnectedActivity
 import com.securicam.ui.pages.login.LoginActivity
+import com.securicam.ui.pages.notification.NotificationActivity
 import com.securicam.ui.pages.register.RegisterActivity
 import com.securicam.ui.pages.requestconnection.RequestConnectToCamActivity
 import com.securicam.ui.pages.requestpair.RequestPairActivity
+import com.securicam.ui.pages.searchcamera.SearchCamActivity
 
 fun goToLoginActivity(context: Context) {
     val intent = LoginActivity.loginActivityIntent(context)
@@ -29,7 +31,6 @@ fun goToDisconnectActivity(context: Context) {
     context.startActivity(intent)
 }
 
-
 fun goToCameraMainActivity(context: Context) {
     val intent = CameraMainActivity.cameraMainActivityIntent(context)
     context.startActivity(intent)
@@ -42,5 +43,15 @@ fun goToRegisterActivity(context: Context) {
 
 fun goToRequestPairActivity(context: Context) {
     val intent = RequestPairActivity.requestPairActivityIntent(context)
+    context.startActivity(intent)
+}
+
+fun goToSearchCamActivity(context: Context) {
+    val intent = SearchCamActivity.searchCamActivityIntent(context)
+    context.startActivity(intent)
+}
+
+fun goToNotificationActivity(context: Context) {
+    val intent = NotificationActivity.notificationActivityIntent(context)
     context.startActivity(intent)
 }
