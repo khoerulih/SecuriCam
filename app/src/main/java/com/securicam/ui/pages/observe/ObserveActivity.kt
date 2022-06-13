@@ -162,7 +162,7 @@ class ObserveActivity : AppCompatActivity() {
                     observeViewModel.sendImageResponses.observe(this@ObserveActivity){ response ->
                         Toast.makeText(
                             this@ObserveActivity,
-                            response.data,
+                            response.message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }

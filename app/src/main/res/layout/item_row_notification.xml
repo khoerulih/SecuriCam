@@ -19,25 +19,39 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_detected"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="2dp"
-            card_view:civ_border_color="@color/blue_100"
-            card_view:civ_border_width="2dp"
+            android:src="@drawable/ic_baseline_campaign_24"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.05"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="1.0"
-            tools:src="@drawable/ic_user" />
+            card_view:layout_constraintTop_toTopOf="@+id/tv_message"
+            card_view:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/tv_detected"
+            android:id="@+id/tv_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             card_view:layout_constraintStart_toEndOf="@+id/img_detected"
             card_view:layout_constraintTop_toTopOf="@+id/img_detected"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="@+id/img_detected"
+            tools:text="@string/detected" />
+
+        <TextView
+            android:id="@+id/tv_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            card_view:layout_constraintStart_toEndOf="@+id/img_detected"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_message"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintBottom_toBottomOf="@+id/img_detected"
             tools:text="@string/detected" />
 
