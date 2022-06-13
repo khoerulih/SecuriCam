@@ -27,7 +27,7 @@ data class ListNotification(
     val from: String,
 
     @field:SerializedName("data")
-    val data: String? = null,
+    val data: List<DetectionResponse>? = null,
 
     @field:SerializedName("to")
     val to: String,
@@ -37,5 +37,27 @@ data class ListNotification(
 
     @field:SerializedName("time")
     val time: Long
+
+) : Parcelable
+
+@Parcelize
+data class DetectionResponse(
+    @field:SerializedName("label")
+    val label: String,
+
+    @field:SerializedName("xmin")
+    val xmin: Int,
+
+    @field:SerializedName("ymax")
+    val ymax: Int,
+
+    @field:SerializedName("confidence")
+    val confidence: Double,
+
+    @field:SerializedName("xmax")
+    val xmax: Int,
+
+    @field:SerializedName("ymin")
+    val ymin: Int,
 
 ) : Parcelable

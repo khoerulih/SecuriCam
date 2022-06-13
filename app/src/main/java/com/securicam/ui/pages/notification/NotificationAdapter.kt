@@ -1,6 +1,9 @@
 package com.securicam.ui.pages.notification
 
+import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -27,18 +30,14 @@ class NotificationAdapter(private val listNotification: List<ListNotification>) 
     class ListViewHolder(private val binding: ItemRowNotificationBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(dataNotification: ListNotification) {
-//            Glide.with(itemView.context).load(dataNotification.imagePath).into(binding.imgDetected)
             binding.tvMessage.text = dataNotification.message
-            itemView.setOnClickListener {
-/*                val goToDetailNotificationActivity =
-                    Intent(itemView.context, DetailClientNotification::class.java)
-                goToDetailNotificationActivity.putExtra(
-                    DetailClientNotification.EXTRA_DATA_NOTIFICATION,
-                    dataNotification
-                )
-
-                itemView.context.startActivity(goToDetailNotificationActivity)*/
-
+            if(!dataNotification.data.isNullOrEmpty()){
+                val objectDetected = dataNotification.data.map {
+                    "${it.label} "
+                }
+                binding.tvData.text = objectDetected.toString()
+            } else {
+                binding.tvData.visibility = View.GONE
             }
         }
     }
